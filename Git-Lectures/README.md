@@ -28,10 +28,10 @@ To get started with Git, you need to install the software
 
 # Reference
   - [Support](mailto:info@tsrlearning.io)
-    ![TSR Learning](www.tsrlearning.io)
+    [TSR Learning](www.tsrlearning.io)
 
-Hurray :rocket: `:rocket:``:rocket:` you installed Git `:smile:``:smile:`
+Hurray :rocket: :rocket: you installed Git :smile: :smile:
 
 # Documentation Reference
-- Download[https://git-scm.com/download/win]
-- Git Docs[https://git-scm.com/docs]
+- Download [https://git-scm.com/download/win]
+- Git Docs [https://git-scm.com/docs]
