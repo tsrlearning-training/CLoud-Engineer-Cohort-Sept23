@@ -27,8 +27,8 @@ To get started with Git, you need to install the software
 
 
 # Reference
-  - [Support](mailto:info@tsrlearning.io)
-    [TSR Learning](www.tsrlearning.io)
+  - [Email US](mailto:info@tsrlearning.io)
+  - [TSR Learning](www.tsrlearning.io)
 
 Hurray :rocket: :rocket: you installed Git :smile: :smile:
 
