@@ -1,6 +1,3 @@
-## Table of Contents
-- [Company Name](#Company Name)
-
 # Company Name: TSR Learning
 ## About
 TSRLearning is a global online learning platform that offers anyone, anywhere access to online courses.
@@ -20,7 +17,7 @@ To get started with Git, you need to install the software
 
 ### Installations
 1. Download the Git Software
-- Click on => Git Download [https://git-scm.com/download/win]
+- Click on => Git Download[https://git-scm.com/download/win]
     - see image below:
     ![Click Windows to Download Git](images/picture-1.png)
 
@@ -33,8 +30,8 @@ To get started with Git, you need to install the software
   - [Support](mailto:info@tsrlearning.io)
     ![TSR Learning](www.tsrlearning.io)
 
-Hurray :rocket: `:rocket:` :rocket: `:rocket:` you installed Git :smile: `:smile:` :smile: `:smile:`
+Hurray :rocket: `:rocket:``:rocket:` you installed Git `:smile:``:smile:`
 
 # Documentation Reference
-- Download [https://git-scm.com/download/win]
-- Git Docs [https://git-scm.com/docs]
+- Download[https://git-scm.com/download/win]
+- Git Docs[https://git-scm.com/docs]
