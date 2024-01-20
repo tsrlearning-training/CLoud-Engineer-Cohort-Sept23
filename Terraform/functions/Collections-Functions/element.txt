@@ -1,0 +1,2 @@
+element(["a", "b", "c"], 1)
+element(["a", "b", "c"], length(["a", "b", "c"])-1)
