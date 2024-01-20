@@ -1,0 +1,4 @@
+syntax
+======
+slice(list, startindex, endindex)
+slice(["a", "b", "c", "d"], 1, 3)

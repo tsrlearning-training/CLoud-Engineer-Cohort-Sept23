@@ -1,0 +1,2 @@
+coalesce("a", "b")
+coalesce(1, "hello")
