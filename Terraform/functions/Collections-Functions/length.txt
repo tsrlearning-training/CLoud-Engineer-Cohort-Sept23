@@ -1,0 +1,4 @@
+length([])
+length(["a", "b"])
+length({"a" = "b"})
+length("hello")
