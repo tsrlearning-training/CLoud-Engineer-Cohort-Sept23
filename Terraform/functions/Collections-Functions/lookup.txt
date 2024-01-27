@@ -1,0 +1,6 @@
+syntax
+======
+lookup(map, key, default)
+
+lookup({a="ay", b="bee"}, "a", "what?")
+lookup({a="ay", b="bee"}, "c", "what?")

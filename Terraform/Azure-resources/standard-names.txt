@@ -1,0 +1,38 @@
+Resource group: 
+rg-tsrlearning-dev-01
+storage account name: 
+stsrlearningdev01
+Key Vault
+kv-tsrlearning-dev-01
+Log analytics workspace
+log-tsrlearning-dev-01
+Virtual Network
+vnet-tsrlearning-dev-01
+Subnet
+snet-tsrlearning-dev-01
+Virtual Machine
+vm-tsrlearning-dev-01
+Route table
+rt-tsrlearning-dev-01
+NSG
+nsg-tsrlearning-dev-01
+LoadBalancer
+lbe-tsrlearning-dev-01
+Public IP
+pip-tsrlearning-dev-01
+Backend Pool
+beap-tsrlearning-dev-01
+load balancing rule
+lbr-tsrlearning-dev-01
+health probe
+hp-tsrlearning-dev-01
+Application Gateway subnet
+agw-snet-tsrlearning-dev-01
+Application Gateway
+agw-tsrlearning-dev-01
+Web Application Firewall (WAF) policy
+waf-tsrlearning-dev-01
+Azure Kubernetes Service
+aks-tsrlearning-dev-01
+Azure Kubernetes Service Subnet
+aks-snet-tsrlearning-dev-01
