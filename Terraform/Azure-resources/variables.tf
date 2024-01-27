@@ -20,3 +20,9 @@ variable "client_secret" {
   description = "(Optional) The Client Secret which should be used. This can also be sourced from the ARM_CLIENT_SECRET Environment Variable."
   type        = string
 }
+
+variable "nsg_name" {
+  description = "(Required) Specifies the name of the network security group. Changing this forces a new resource to be created."
+  type        = string
+  default     = "nsg-tsrlearning-dev-01"
+}
