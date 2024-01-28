@@ -7,8 +7,8 @@ locals {
     casecode    = "tsr2024"
   }
   application_tags = {
-    suffix               = "dev-01"
-    username             = "tsrlearning-admin"
+    suffix   = "dev-01"
+    username = "tsrlearning-admin"
     # storage_account_name = "tsrlearningstor"
     # container_name       = "terraformstate"
   }
