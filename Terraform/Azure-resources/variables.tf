@@ -68,5 +68,10 @@ variable "virtual_machine_name" {
 
 variable "source_address_prefix" {
   description = "value"
-  type = string
+  type        = string
+}
+
+variable "disk_size_gb" {
+  description = "Disk Size to be attached"
+  type        = string
 }

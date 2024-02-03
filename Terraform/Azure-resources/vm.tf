@@ -25,3 +25,20 @@ resource "azurerm_linux_virtual_machine" "vm" {
     version   = "latest"
   }
 }
+
+# Attach Disk
+resource "azurerm_managed_disk" "disk" {
+  name                 = "${var.virtual_machine_name}-disk1"
+  location             = azurerm_resource_group.rg.location
+  resource_group_name  = azurerm_resource_group.rg.name
+  storage_account_type = "Standard_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = var.disk_size_gb
+}
+
+resource "azurerm_virtual_machine_data_disk_attachment" "disk_attachment" {
+  managed_disk_id    = azurerm_managed_disk.disk.id
+  virtual_machine_id = azurerm_linux_virtual_machine.vm.id
+  lun                = "10"
+  caching            = "ReadWrite"
+}
