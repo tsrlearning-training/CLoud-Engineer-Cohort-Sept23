@@ -28,7 +28,8 @@ resource "azurerm_network_security_rule" "http_rule" {
   destination_port_range      = "80"
   source_address_prefix       = var.source_address_prefix
   destination_address_prefix  = "*"
-  description                 = "NSG used for SSH login to Linux Server"
+  description                 = "NSG used for HTTP connectivity"
   resource_group_name         = azurerm_resource_group.rg.name
   network_security_group_name = azurerm_network_security_group.sg.name
 }
+
