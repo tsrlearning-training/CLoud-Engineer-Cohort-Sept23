@@ -36,3 +36,12 @@ Azure Kubernetes Service
 aks-tsrlearning-dev-01
 Azure Kubernetes Service Subnet
 aks-snet-tsrlearning-dev-01
+
+
+
+
+# Commands
+a2ensite apache.conf
+apache2ctl configtest
+systemctl restart apache2
+systemctl reload apache2
