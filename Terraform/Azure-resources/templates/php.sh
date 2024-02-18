@@ -11,7 +11,7 @@ php_path="/var/www/html"
 linux_user="$linux_user"
 
 if [ -z "$Repository" ] || [ -z "$path" ] || [ -z "$db_user" ] || [ -z "$db_secrets" ] || [ -z "$db_name" ] || [ -z "$php_path" ] || [ -z "$linux_user" ];then
-   echo "All expected variables have not be declared, Please pass the variables"
+   echo "All expected variables have not be declared, Please pass the values for the variables"
    exit 1
 fi
 
@@ -83,6 +83,32 @@ sed -i 's/password/db_secrets/g' db.php
 sed -i 's/database/db_name/g' db.php
 sudo mysql -u "$db_user" "-p$db_secrets" < "database.sql"
 
-# Retart Services
-echo "Starting Apache Web app & MySQL DB"
-sudo systemctl restart apache2 && sudo systemctl restart mysql.service 
+sudo rm /etc/apache2/sites-available/000-default.conf && sudo rm /etc/apache2/sites-available/default-ssl.conf
+sudo mv /tmp/demotsrlearning.com.crt /etc/ssl/certs/ssl-cert-demotsrlearning.com.crt
+sudo mv /tmp/demotsrlearning.com_key.txt /etc/ssl/private/ssl-cert-demotsrlearning.com.key
+
+# Update certificate in Apache server
+echo "Updating certificate for HTTPS"
+sudo bash -c 'cat > /etc/apache2/sites-available/demotsrlearning.conf <<EOF
+  <VirtualHost *:80>
+    ServerName demotsrlearning.com
+    ServerAlias *.demotsrlearning.com
+    Redirect permanent / https://www.demotsrlearning.com/
+  </VirtualHost>
+
+  <VirtualHost *:443>
+    DocumentRoot /var/www/html/
+    ServerName www.demotsrlearning.com
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/certs/ssl-cert-demotsrlearning.com.crt
+    SSLCertificateKeyFile /etc/ssl/private/ssl-cert-demotsrlearning.com.key
+  </VirtualHost>
+EOF'
+
+# Enable HTTPS
+cd /etc/apache2/sites-available/
+sudo a2ensite demotsrlearning.conf
+sudo a2enmod ssl
+sudo apache2ctl configtest
+sudo systemctl reload apache2
+sudo systemctl restart mysql

@@ -36,3 +36,5 @@ terraform.rc
 # SSH Keys
 *pub*
 tsrlearning-key
+demotsrlearning.com_cert/
+demotsrlearning.com_key/

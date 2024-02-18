@@ -79,24 +79,14 @@ variable "disk_size_gb" {
 variable "db_user" {
   description = "Database USerName"
   type        = string
-  default     = "root"
 }
 
 variable "db_name" {
   description = "Database Name"
   type        = string
-  default     = "demo"
 }
 
 variable "linux_user" {
   description = "Linux UserName"
   type        = string
-  default     = "tsrlearning-admin"
 }
-
-# variable "db_secrets" {
-#   description = "Database password"
-#   type        = string
-#   sensitive   = false
-#   default     = "oAryprOlorPoSEdeTIoN"
-# }
