@@ -20,3 +20,9 @@ variable "client_secret" {
   description = "(Optional) The Client Secret which should be used. This can also be sourced from the ARM_CLIENT_SECRET Environment Variable."
   type        = string
 }
+
+# variable "virtual_machines" {
+#   description = "Virtual Machines to be deployed"
+#   type        = map(object({}))
+#   default     = {}
+# }
