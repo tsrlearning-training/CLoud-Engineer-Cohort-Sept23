@@ -1,0 +1,12 @@
+---
+all:
+  children:
+    web_servers:
+      hosts:
+        13.93.142.189:
+    php_servers:
+      hosts:
+        13.93.142.207:
+    database:
+      hosts:
+        13.93.142.94:

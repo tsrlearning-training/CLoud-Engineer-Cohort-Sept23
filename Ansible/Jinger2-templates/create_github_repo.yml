@@ -1,0 +1,40 @@
+- name: Create GitHub Repository
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - secrets.yml
+  tasks:
+    - name: Generate JSON body from Jinja2 template
+      set_fact:
+        repo_body: "{{ lookup('template', 'github_repo_body.j2') }}"
+
+    - name: Create GitHub Repository
+      uri:
+        url: "{{ github_api_url }}"
+        method: POST
+        body: "{{ repo_body }}"
+        body_format: json
+        headers:
+          Authorization: "token {{ github_token }}"
+          Content-Type: "application/json"
+        status_code: 201
+      register: response
+      
+    - name: Print API Response
+      debug:
+        var: response.json
+
+    - name: Delete GitHub Repository
+      uri:
+        url: "https://api.github.com/repos/{{ repo_owner }}/{{ repo_name }}"
+        method: DELETE
+        headers:
+          Authorization: "token {{ github_token }}"
+          Content-Type: "application/json"
+        status_code: 204
+      register: delete_response
+      ignore_errors: yes
+
+    - name: Print Delete Response
+      debug:
+        var: delete_response
