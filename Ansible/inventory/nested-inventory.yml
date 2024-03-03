@@ -1,0 +1,21 @@
+---
+all:
+  children:
+    web_servers:
+      hosts:
+      10.0.0.0:
+    php_servers:
+      hosts:
+      10.0.0.0:
+    database:
+      hosts:
+      10.0.0.0:
+
+# Nested Groups
+    production:
+      children:
+        php_servers:
+
+    Development:
+      children:
+        web_servers:
