@@ -3,8 +3,8 @@ locals {
     vm-1 = {
       name           = data.azurecaf_name.vm_1.result
       size           = "Standard_F2"
-      username       = "demo"
-      admin_username = "demo"
+      username       = "tsrlearning"
+      admin_username = "tsrlearning"
       public_key     = file("tsrlearningkey.pub")
     },
     vm-2 = {
