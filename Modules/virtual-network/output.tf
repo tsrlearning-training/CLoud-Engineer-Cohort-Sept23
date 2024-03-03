@@ -3,7 +3,7 @@ output "vnet_name" {
 }
 
 output "pip_id" {
-  value = azurerm_public_ip.pip.id
+  value = module.virtual_network.ip_address
 }
 
 
