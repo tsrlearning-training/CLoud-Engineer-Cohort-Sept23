@@ -1,8 +1,111 @@
 ---
-- name: Deploy PHP Application
-  hosts: Production
-  gather_facts: yes
+- hosts: webservers
   become: yes
+  vars:
+    db_user: root
+    db_secrets: tsrlearning
+    db_name: demo
+    php_path: /var/www/html
+    linux_user: tsrlearning
+    repository: https://github.com/tsrlearning-training/CLoud-Engineer-Cohort-Sept23.git
+    # path: /mnt/c/Users/start/OneDrive/Documentos/TSR Learning LLC/CLoud-Engineer-Cohort-Sept23/Ansible/phpmysql-app/*
+
   tasks:
-    - name: Run script to automate PHP App.
-      script: scripts/php.sh
+    - name: Install necessary packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - python3-pip
+        - php
+        - libapache2-mod-php
+        - php-mysql
+        - apache2
+        - mysql-server
+
+    - name: Install PyMySQL
+      pip:
+        name: PyMySQL
+        state: present
+        
+    - name: Configure MySQL root user and privileges
+      mysql_user:
+        login_user: "{{ db_user }}"
+        login_password: "{{ db_secrets }}"
+        name: "{{ db_user }}"
+        password: "{{ db_secrets }}"
+        host: localhost
+        priv: '*.*:ALL,GRANT'
+        state: present
+
+    - name: Ensure the database exists
+      mysql_db:
+        name: "{{ db_name }}"
+        state: present
+
+    - name: Change ownership of web directory
+      file:
+        path: "{{ php_path }}"
+        owner: "{{ linux_user }}"
+        group: "{{ linux_user }}"
+        recurse: yes
+
+    - name: Secure MySQL installation using expect
+      expect:
+        command: sudo mysql_secure_installation
+        responses:
+          (?i)enter password for user root: "{{ db_secrets }}"
+          (?i)press y|Y for yes, any other key for no: "y"
+          (?i)please enter 0 = low, 1 = medium and 2 = strong: "1"
+          (?i)change the password for root ? ((press y|Y for yes, any other key for no) : "n"
+          (?i)remove anonymous users? (press y|Y for yes, any other key for no) : "y"
+          (?i)disallow root login remotely? (press y|Y for yes, any other key for no) : "y"
+          (?i)remove test database and access to it? (press y|Y for yes, any other key for no) : "y"
+          (?i)reload privilege tables now? (press y|Y for yes, any other key for no) : "y"
+        timeout: 120
+      ignore_errors: yes
+
+    - name: Clone repository
+      git:
+        repo: "{{ repository }}"
+        dest: "/tmp/repo"
+
+    - name: Copy application files to the web server directory
+      copy:
+        src: "/tmp/repo/Ansible/phpmysql-app/"
+        dest: "{{ php_path }}"
+        remote_src: yes
+
+    # - name: Update Apache configuration for SSL
+    #   blockinfile:
+    #     path: /etc/apache2/sites-available/demotsrlearning.conf
+    #     block: |
+    #       <VirtualHost *:80>
+    #         ServerName demotsrlearning.com
+    #         ServerAlias *.demotsrlearning.com
+    #         Redirect permanent / https://www.demotsrlearning.com/
+    #       </VirtualHost>
+
+    #       <VirtualHost *:443>
+    #         DocumentRoot /var/www/html/
+    #         ServerName www.demotsrlearning.com
+    #         SSLEngine on
+    #         SSLCertificateFile /etc/ssl/certs/ssl-cert-demotsrlearning.com.crt
+    #         SSLCertificateKeyFile /etc/ssl/private/ssl-cert-demotsrlearning.com.key
+    #       </VirtualHost>
+    #     create: yes
+
+    # - name: Enable site and SSL module
+    #   ansible.builtin.shell: |
+    #     a2ensite demotsrlearning.conf
+    #     a2enmod ssl
+    #     apache2ctl configtest
+    #     systemctl reload apache2
+
+    - name: Restart services
+      service:
+        name: "{{ item }}"
+        state: restarted
+      loop:
+        - apache2
+        - mysql
