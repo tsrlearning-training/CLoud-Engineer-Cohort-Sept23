@@ -1,0 +1,5 @@
+---
+# vars file for docker
+docker_url: https://download.docker.com/linux/ubuntu/gpg
+key_dest:   /etc/apt/keyrings/docker.asc
+bionic_url: https://download.docker.com/linux/ubuntu

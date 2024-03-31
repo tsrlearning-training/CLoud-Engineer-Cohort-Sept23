@@ -1,0 +1,31 @@
+---
+- hosts: Dba
+  become: yes
+  tasks:
+    - name: Update Os
+      apt:
+        update_cache: yes
+        state: present
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+      notify: restart nginx
+    
+    - name: Create simple HTML
+      copy:
+        content: |
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>Welcome to Class</title>
+          <head>
+          <body>
+            <h1> Ansible is cool</h1>
+            <h1> This Page is managed with Ansible</h1>
+          <body>
+          <html>
+      dest: /var/www/html/site.html
+      mode: "0644"
+      
