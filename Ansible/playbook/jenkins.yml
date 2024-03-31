@@ -1,0 +1,32 @@
+---
+- hosts: Development
+  name: Install Jenkins
+  become: yes
+  tasks:
+    - name: Update OS
+      apt:
+        update_cache: true
+    
+    - name: Install Java Software
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - fontconfig
+        - openjdk-17-jre
+
+    - name: Add Jenkins GPG key
+      apt_key:
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+        state: present
+
+    - name: Add Jenkins repository
+      apt_repository:
+        repo: deb [signed-by=/usr/share/keyrings/jenkins-archive-keyring.gpg] https://pkg.jenkins.io/debian-stable binary/
+        state: present
+        filename: jenkins
+
+    - name: Install Jenkins
+      apt: 
+        update_cache: true
+        name: Jenkins

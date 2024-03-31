@@ -1,0 +1,4 @@
+---
+# vars file for nginx
+source_file: ""
+conf_dest: /etc/nginx/sites-available

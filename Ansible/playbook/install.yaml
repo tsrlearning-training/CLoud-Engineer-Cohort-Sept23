@@ -1,0 +1,9 @@
+---
+- hosts: docker
+  become: yes
+  gather_facts: yes
+  # vars:
+  #   ansible_os_family: "setup-Ubuntu"
+  roles:
+    - "../roles/apache"
+    # - "../roles/geerlingguy.nginx"
