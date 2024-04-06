@@ -1,5 +1,5 @@
 ---
-- hosts: Dba
+- hosts: webservers
   become: yes
   tasks:
     - name: Update Os
@@ -11,8 +11,12 @@
       apt:
         name: nginx
         state: present
-      notify: restart nginx
-    
+        
+    - name: Deploy NGINX configuration
+      template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/sites-available/default
+          
     - name: Create simple HTML
       copy:
         content: |
@@ -26,6 +30,5 @@
             <h1> This Page is managed with Ansible</h1>
           <body>
           <html>
-      dest: /var/www/html/site.html
-      mode: "0644"
-      
+        dest: /var/www/html/site.html
+        mode: "0644"
