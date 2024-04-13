@@ -1,3 +1,41 @@
+<?php
+// Only process the form if the request is POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // MySQL connection variables
+    $servername = "db";  // The hostname (Docker service name)
+    $username = "tsrlearning";
+    $password = "tsrlearning";
+    $dbname = "InventoryDB";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Prepare and bind
+    $stmt = $conn->prepare("INSERT INTO inventory (item_name, quantity, date_received, supplier_name, price_per_item) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sisds", $item_name, $quantity, $date_received, $supplier_name, $price_per_item);
+
+    // Set parameters from POST data
+    $item_name = $_POST['item-name'];
+    $quantity = $_POST['quantity'];
+    $date_received = $_POST['date-received'];
+    $supplier_name = $_POST['supplier-name'];
+    $price_per_item = $_POST['price-per-item'];
+
+    // Execute and close
+    if ($stmt->execute()) {
+        echo "<p>New records created successfully</p>";
+    } else {
+        echo "<p>Error: " . $stmt->error . "</p>";
+    }
+    $stmt->close();
+    $conn->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,7 +92,7 @@
 </style>
 </head>
 <body>
-<form>
+<form action="" method="post">
     <h2>Inventory Registration</h2>
     <div class="input-group">
         <label for="item-name">Item Name</label>
