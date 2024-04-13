@@ -7,7 +7,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 RUN mkdir -p /usr/share/nginx/html
 
 # Copy the site.html into the correct directory
-COPY site.html /usr/share/nginx/html/
+COPY booking.html site.html /usr/share/nginx/html/
 
 # Expose port 80
 EXPOSE 80
