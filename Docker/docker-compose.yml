@@ -17,7 +17,7 @@ services:
   php:
     image: php:7.4-fpm
     expose:
-      - "9000"
+      - "9000:9000"
     volumes:
       - ./site:/var/www/html
     networks:
