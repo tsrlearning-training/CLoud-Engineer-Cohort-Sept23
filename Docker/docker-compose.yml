@@ -6,8 +6,8 @@ services:
       - "80:80"
     volumes:
       # - ./site.html:/usr/share/nginx/html/site.html
-      - ./nginx/booking.html:/usr/share/nginx/html/booking.html
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - nginx/booking.html:/usr/share/nginx/html/booking.html
+      - nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - db
 
