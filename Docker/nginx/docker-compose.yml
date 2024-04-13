@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  web:
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      # - ./site.html:/usr/share/nginx/html/site.html
+      - ./booking.html:/usr/share/nginx/html/booking.html
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - db
+
+  db:
+    build: ./nginx/dockerfile.mysql
+    environment:
+      MYSQL_DATABASE: 'InventoryDB'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'rootpassword'
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
