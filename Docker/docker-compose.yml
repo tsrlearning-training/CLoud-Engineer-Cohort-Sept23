@@ -12,12 +12,12 @@ services:
       - db
 
   db:
-    build: ./nginx/dockerfile.mysql
+    build: ./mysql
     environment:
       MYSQL_DATABASE: 'InventoryDB'
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'password'
-      MYSQL_ROOT_PASSWORD: 'rootpassword'
+      MYSQL_USER: 'tsrlearning'
+      MYSQL_PASSWORD: 'tsrlearning'
+      MYSQL_ROOT_PASSWORD: 'tsrlearning'
     ports:
       - "3306:3306"
     volumes:
