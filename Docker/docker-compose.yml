@@ -5,7 +5,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx/booking.html:/usr/share/nginx/html/booking.html
+      - ./nginx/index.php:/usr/share/nginx/html/index.php
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
 
     depends_on:
