@@ -26,3 +26,9 @@ variable "client_secret" {
 #   type        = map(object({}))
 #   default     = {}
 # }
+
+variable "vm_username" {
+  type        = string
+  description = "VM username for login"
+  default     = "tsrlearning"
+}
