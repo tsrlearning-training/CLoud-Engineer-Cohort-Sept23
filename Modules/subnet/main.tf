@@ -1,5 +1,5 @@
 resource "azurerm_subnet" "snet" {
-  name                 = coalesce(data.azurecaf_name.snet.result, var.subnet_name)
+  name                 = coalesce(var.subnet_name, data.azurecaf_name.subnet.result)
   resource_group_name  = var.resource_group_name
   virtual_network_name = var.virtual_network_name
   address_prefixes     = var.snet_address_prefixes
@@ -19,7 +19,7 @@ resource "azurerm_subnet" "snet" {
 # }
 
 resource "azurerm_network_security_group" "sg" {
-  name                = coalesce(data.azurecaf_name.nsg.result, var.nsg_name)
+  name                = coalesce(var.nsg_name, data.azurecaf_name.nsg.result)
   location            = var.location
   resource_group_name = var.resource_group_name
 }
