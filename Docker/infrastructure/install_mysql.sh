@@ -45,9 +45,13 @@ echo "Starting MySQL DB"
 sudo systemctl start mysql.service 
 
 # Create a database and user, handle existing cases
-sudo mysql -u root -p"$db_secrets" -e "CREATE DATABASE IF NOT EXISTS $db_name;"
-sudo mysql -u root -p"$db_secrets" -e "CREATE USER IF NOT EXISTS '$db_user'@'localhost' IDENTIFIED BY '$db_user_password';"
-sudo mysql -u root -p"$db_secrets" -e "GRANT ALL PRIVILEGES ON $db_name.* TO '$db_user'@'localhost';"
-sudo mysql -u root -p"$db_secrets" -e "FLUSH PRIVILEGES;"
+# sudo mysql -u root -p"$db_secrets" -e "CREATE DATABASE IF NOT EXISTS $db_name;"
+# sudo mysql -u root -p"$db_secrets" -e "CREATE USER IF NOT EXISTS '$db_user'@'localhost' IDENTIFIED BY '$db_user_password';"
+# sudo mysql -u root -p"$db_secrets" -e "GRANT ALL PRIVILEGES ON $db_name.* TO '$db_user'@'localhost';"
+# sudo mysql -u root -p"$db_secrets" -e "FLUSH PRIVILEGES;"
 
-echo "MySQL setup completed successfully."
+# echo "MySQL setup completed successfully."
+
+
+# sudo mysql -u root -p"$db_secrets" -e  "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'reactapp';"
+# FLUSH PRIVILEGES;

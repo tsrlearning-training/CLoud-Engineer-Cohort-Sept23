@@ -23,30 +23,30 @@ resource "null_resource" "docker-install" {
   depends_on = [azurerm_linux_virtual_machine.vm]
 }
 
-resource "null_resource" "mysql_install" {
-  provisioner "file" {
-    connection {
-      type        = "ssh"
-      user        = "tsrlearning"
-      private_key = file("tsrlearningkey")
-      host        = azurerm_public_ip.vm_1.ip_address
-    }
+# resource "null_resource" "mysql_install" {
+#   provisioner "file" {
+#     connection {
+#       type        = "ssh"
+#       user        = "tsrlearning"
+#       private_key = file("tsrlearningkey")
+#       host        = azurerm_public_ip.vm_1.ip_address
+#     }
 
-    source      = "install_mysql.sh"
-    destination = "/home/tsrlearning/install_mysql.sh"
-  }
-  provisioner "remote-exec" {
-    connection {
-      type        = "ssh"
-      user        = "tsrlearning"
-      private_key = file("tsrlearningkey")
-      host        = azurerm_public_ip.vm_1.ip_address
-    }
+#     source      = "install_mysql.sh"
+#     destination = "/home/tsrlearning/install_mysql.sh"
+#   }
+#   provisioner "remote-exec" {
+#     connection {
+#       type        = "ssh"
+#       user        = "tsrlearning"
+#       private_key = file("tsrlearningkey")
+#       host        = azurerm_public_ip.vm_1.ip_address
+#     }
 
-    inline = [
-      "chmod +x /home/tsrlearning/install_mysql.sh",
-      "sudo /home/tsrlearning/install_mysql.sh"
-    ]
-  }
-  depends_on = [azurerm_linux_virtual_machine.vm]
-}
+#     inline = [
+#       "chmod +x /home/tsrlearning/install_mysql.sh",
+#       "sudo /home/tsrlearning/install_mysql.sh"
+#     ]
+#   }
+#   depends_on = [azurerm_linux_virtual_machine.vm]
+# }
