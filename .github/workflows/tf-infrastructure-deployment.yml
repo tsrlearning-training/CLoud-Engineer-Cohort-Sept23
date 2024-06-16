@@ -32,6 +32,9 @@ jobs:
       - name: terraform fmt
         run: cd ${{ env.workdir }} && terraform fmt -check
       
+      - name: list
+        run: cd ${{ env.workdir }} && ls -l Docker/infrastructure/
+
       - name: terraform validate
         run: cd ${{ env.workdir }} && terraform validate
         env:
