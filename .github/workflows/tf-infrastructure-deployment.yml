@@ -33,6 +33,8 @@ jobs:
       
       - name: terraform validate
         run: cd ${{ env.workdir }} && terraform validate
+        with:
+          TF_VAR_private_key: ${{ secrets.private_key }}
       
-      - name: terraform plan
-        run: cd ${{ env.workdir }} && terraform plan -out=tfplan
+      # - name: terraform plan
+      #   run: cd ${{ env.workdir }} && terraform plan -out=tfplan

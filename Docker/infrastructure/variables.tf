@@ -32,3 +32,7 @@ variable "vm_username" {
   description = "VM username for login"
   default     = "tsrlearning"
 }
+
+variable "private_key" {
+  type = string
+}
