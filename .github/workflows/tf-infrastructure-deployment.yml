@@ -11,6 +11,7 @@ on:
 env:
   terraform_version: "1.1.7"
   workdir: "Docker/infrastructure/"
+  private_key: ${{ secrets.private_key }}
 
 jobs:
   Terrraform-deploymets:
@@ -34,7 +35,7 @@ jobs:
       - name: terraform validate
         run: cd ${{ env.workdir }} && terraform validate
         with:
-          TF_VAR_private_key: ${{ secrets.private_key }}
+          TF_VAR_private_key: "${{ env.private_key }}"
       
       # - name: terraform plan
       #   run: cd ${{ env.workdir }} && terraform plan -out=tfplan
