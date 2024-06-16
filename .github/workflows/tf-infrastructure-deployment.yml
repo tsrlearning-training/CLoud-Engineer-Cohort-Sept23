@@ -6,6 +6,7 @@ on:
       # - main
     paths:
       - "Docker/infrastructure/**"
+      - ".github/workflows/tf-infrastructure-deployment.yml"
 
 env:
   terraform_version: "1.1.7"
@@ -38,3 +39,4 @@ jobs:
       
       # - name: terraform plan
       #   run: terraform plan -out=tfplan
+      
