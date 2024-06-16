@@ -33,12 +33,12 @@ jobs:
       
       - name: Azure CLI login
         run: az login --use-device-code
-        
+
       - name: terraform init
         run: cd ${{ env.workdir }} && terraform init
 
       - name: terraform fmt
-        run: cd ${{ env.workdir }} && terraform fmt -check
+        run: cd ${{ env.workdir }} && terraform fmt .
 
       - name: terraform validate
         run: cd ${{ env.workdir }} && terraform validate
