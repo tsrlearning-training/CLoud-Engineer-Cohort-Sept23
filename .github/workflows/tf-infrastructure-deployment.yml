@@ -23,15 +23,18 @@ jobs:
         with:
           terraform_version: ${{ env.terraform_version }}
 
-      - name: terraform init
-        run: terraform init
+      - name: list
+        run: ls -l
 
-      - name: terraform fmt
-        run: terraform fmt -check
+      # - name: terraform init
+      #   run: terraform init
+
+      # - name: terraform fmt
+      #   run: terraform fmt -check
       
       
-      - name: terraform validate
-        run: terraform validate
+      # - name: terraform validate
+      #   run: terraform validate
       
-      - name: terraform plan
-        run: terraform plan -out=tfplan
+      # - name: terraform plan
+      #   run: terraform plan -out=tfplan
