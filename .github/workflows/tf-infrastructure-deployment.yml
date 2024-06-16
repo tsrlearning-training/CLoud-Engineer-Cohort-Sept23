@@ -29,10 +29,10 @@ jobs:
         run: cd ${{ env.workdir }} && terraform init
 
       - name: terraform fmt
-        run: terraform fmt -check
+        run: cd ${{ env.workdir }} && terraform fmt -check
       
       - name: terraform validate
-        run: terraform validate
+        run: cd ${{ env.workdir }} && terraform validate
       
       - name: terraform plan
-        run: terraform plan -out=tfplan
+        run: cd ${{ env.workdir }} && terraform plan -out=tfplan
