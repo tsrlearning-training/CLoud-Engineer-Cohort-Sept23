@@ -205,3 +205,4 @@ resource "azurerm_network_security_rule" "vault_cluster_addr_rule" {
   resource_group_name         = module.resource_group.rg_name
   network_security_group_name = module.subnet.nsg_name
 }
+
