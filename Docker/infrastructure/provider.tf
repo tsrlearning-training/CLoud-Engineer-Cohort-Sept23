@@ -18,16 +18,15 @@ variable "login_username" {
 
 variable "login_password" {
   type    = string
-  default = "Arede12$"
 }
 
-provider "vault" {
-  auth_login {
-    path = "auth/userpass/login/${var.login_username}"
+# provider "vault" {
+#   auth_login {
+#     path = "auth/userpass/login/${var.login_username}"
 
-    parameters = {
-      password = var.login_password
-    }
-  }
-  address = "http://13.93.176.231:8200"
-}
+#     parameters = {
+#       password = var.login_password
+#     }
+#   }
+#   address = "http://13.93.176.231:8200"
+# }

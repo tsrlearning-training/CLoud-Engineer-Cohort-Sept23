@@ -46,14 +46,14 @@ data "azurecaf_name" "vm_3" {
   separator     = "-"
 }
 
-data "vault_generic_secret" "tsrlearning_link_cert" {
-  path = "kv/Application-gateway-secrets-dev/"
-}
+# data "vault_generic_secret" "tsrlearning_link_cert" {
+#   path = "kv/Application-gateway-secrets-dev/"
+# }
 
-data "vault_generic_secret" "administrator_login" {
-  path = "kv/Mysql-secrets-dev"
-}
+# data "vault_generic_secret" "administrator_login" {
+#   path = "kv/Mysql-secrets-dev"
+# }
 
-data "vault_generic_secret" "administrator_login_password" {
-  path = "kv/Mysql-secrets-dev"
-}
+# data "vault_generic_secret" "administrator_login_password" {
+#   path = "kv/Mysql-secrets-dev"
+# }
