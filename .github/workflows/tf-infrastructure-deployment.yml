@@ -43,7 +43,7 @@ jobs:
           TF_VAR_client_secret: "${{ secrets.client_secret }}"
       
       - name: terraform plan
-        run: cd ${{ env.workdir }} && terraform plan -out=tfplan
+        run: cd ${{ env.workdir }} && terraform plan
         env:
           TF_VAR_private_key: "${{ secrets.private_key }}"
           TF_VAR_client_secret: "${{ secrets.client_secret }}"
