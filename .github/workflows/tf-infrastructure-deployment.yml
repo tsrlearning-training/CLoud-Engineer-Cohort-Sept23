@@ -54,3 +54,10 @@ jobs:
           TF_VAR_client_secret: "${{ secrets.client_secret }}"
           TF_VAR_login_password: "${{ secrets.login_password }}"
 
+      - name: terraform apply
+        run: cd ${{ env.workdir }} && terraform apply -auto-approve
+        env:
+          TF_VAR_private_key: "${{ secrets.private_key }}"
+          TF_VAR_client_secret: "${{ secrets.client_secret }}"
+          TF_VAR_login_password: "${{ secrets.login_password }}"
+
