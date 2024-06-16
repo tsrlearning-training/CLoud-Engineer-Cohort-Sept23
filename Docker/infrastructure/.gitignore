@@ -34,12 +34,12 @@ override.tf.json
 terraform.rc
 
 # SSH Keys
-*pub*
+# *pub*
 tsrlearning-key
 demotsrlearning.com_cert/
 demotsrlearning.com_key/
 tsrlearningkey
-tsrlearning.link_cert/
+# tsrlearning.link_cert/
 ../React-App-MySQL
 ../../Resume-Generator
 ../../Kubeadmin
