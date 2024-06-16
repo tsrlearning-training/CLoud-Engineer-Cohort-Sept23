@@ -21,17 +21,17 @@ module "subnet" {
   virtual_network_name  = module.virtual_network.vnet_name
 }
 
-module "appgw_subnet" {
-  use_caf_naming        = false
-  subnet_name           = "appgwsnet-ce-dev-01"
-  nsg_name              = "appgwnsg-ce-dev-01"
-  source                = "git::https://github.com/tsrlearning-training/CLoud-Engineer-Cohort-Sept23.git//Modules/subnet?ref=v1.1.1"
-  snet_address_prefixes = ["10.1.81.0/24"]
-  resource_group_name   = module.resource_group.rg_name
-  location              = module.resource_group.rg_location
-  public_ip_address_id  = azurerm_public_ip.resume_app.ip_address
-  virtual_network_name  = module.virtual_network.vnet_name
-}
+# module "appgw_subnet" {
+#   use_caf_naming        = false
+#   subnet_name           = "appgwsnet-ce-dev-01"
+#   nsg_name              = "appgwnsg-ce-dev-01"
+#   source                = "git::https://github.com/tsrlearning-training/CLoud-Engineer-Cohort-Sept23.git//Modules/subnet?ref=v1.1.1"
+#   snet_address_prefixes = ["10.1.81.0/24"]
+#   resource_group_name   = module.resource_group.rg_name
+#   location              = module.resource_group.rg_location
+#   public_ip_address_id  = azurerm_public_ip.resume_app.ip_address
+#   virtual_network_name  = module.virtual_network.vnet_name
+# }
 
 ############## VM ##############################
 resource "azurerm_public_ip" "vm_1" {
