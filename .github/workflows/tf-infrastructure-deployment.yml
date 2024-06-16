@@ -27,14 +27,18 @@ jobs:
         with:
           terraform_version: ${{ env.terraform_version }}
 
+      - name: Install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+      
+      - name: Azure CLI login
+        run: az login --use-device-code
+        
       - name: terraform init
         run: cd ${{ env.workdir }} && terraform init
 
       - name: terraform fmt
         run: cd ${{ env.workdir }} && terraform fmt -check
-      
-      - name: list
-        run: cd ${{ env.workdir }} && ls -l
 
       - name: terraform validate
         run: cd ${{ env.workdir }} && terraform validate
@@ -47,4 +51,3 @@ jobs:
         env:
           TF_VAR_private_key: "${{ secrets.private_key }}"
           TF_VAR_client_secret: "${{ secrets.client_secret }}"
-          
