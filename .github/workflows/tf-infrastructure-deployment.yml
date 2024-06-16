@@ -1,0 +1,37 @@
+name: Create Terraform code for tf-infrastructure folder
+on:
+  push:
+    branches:
+      - tsrlearnindev
+      # - main
+    paths:
+      - "Docker/infrastructure/**"
+
+env:
+  terraform_version: "1.1.7"
+
+jobs:
+  Terrraform-deploymets:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@4
+      
+      - name: Terraform install version
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.terraform_version }}
+
+      - name: terraform init
+        run: terraform init
+
+      - name: terraform fmt
+        run: terraform fmt -check
+      
+      
+      - name: terraform validate
+        run: terraform validate
+      
+      - name: terraform plan
+        run: terraform plan -out=tfplan

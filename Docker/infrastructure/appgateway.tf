@@ -112,7 +112,7 @@ resource "azurerm_application_gateway" "resume_app" {
   ssl_certificate {
     name     = "tsrlearning.link"
     data     = filebase64("tsrlearning.link_cert/tsrlearning.link.pfx")
-    password = "naUmg!tt0v8kNssk"
+    password = data.vault_generic_secret.tsrlearning_link_cert.data["ssl-password-tsrlearning-link"]
   }
 
   probe {

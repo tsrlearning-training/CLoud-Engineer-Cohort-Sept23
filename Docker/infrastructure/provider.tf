@@ -9,3 +9,25 @@ provider "azurerm" {
   tenant_id       = var.tenant_id
   client_secret   = var.client_secret
 }
+
+
+variable "login_username" {
+  type    = string
+  default = "tsrlearning"
+}
+
+variable "login_password" {
+  type    = string
+  default = "Arede12$"
+}
+
+provider "vault" {
+  auth_login {
+    path = "auth/userpass/login/${var.login_username}"
+
+    parameters = {
+      password = var.login_password
+    }
+  }
+  address = "http://13.93.176.231:8200"
+}
