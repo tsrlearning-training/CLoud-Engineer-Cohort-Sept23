@@ -15,10 +15,6 @@ on:
 
 
 env:
-  # AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-  # AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-  # AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-  # TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
    workdir: "Docker/infrastructure/scripts/"
    TF_VAR_client_secret: "${{ secrets.client_secret }}"
    TF_VAR_slack_webhook_url: "${{ secrets.client_secret }}"
@@ -32,7 +28,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Az login
-        run: az login --use-device-code
+        run: az login --service-principal -u "b26145ad-4bdc-4af7-bc86-8dc3d89e9d4e" -p ${{ secrets.client_secret }} --tenant "389dc11c-508a-4f1e-a529-1f19aa1a8e7b"
+        env:
+          TF_VAR_client_secret: "${{ secrets.client_secret }}"
 
       - name: Install Azure CLI
         run: |
@@ -45,10 +43,6 @@ jobs:
         run: |
           cd ${{ env.workdir }} && sudo chmod +x ./monitor_cost.sh && ./monitor_cost.sh "b26145ad-4bdc-4af7-bc86-8dc3d89e9d4e" "${{ secrets.client_secret }}" "389dc11c-508a-4f1e-a529-1f19aa1a8e7b" "f823a9e2-b296-41ab-b452-5f2c01eefae8" "${{ secrets.SLACK_WEBHOOK_URL }}" 
         env:
-        #   AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-        #   AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-        #   AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-        #   TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
          TF_VAR_client_secret: "${{ secrets.client_secret }}"
          TF_VAR_slack_webhook_url: "${{ secrets.client_secret }}"
 
