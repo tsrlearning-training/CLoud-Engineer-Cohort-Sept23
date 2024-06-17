@@ -17,7 +17,13 @@ START_OF_MONTH=$(date +%Y-%m-01)
 az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID"
 
 # Get the current month's cost
-CURRENT_COST=$(az consumption pricesheet show --start-date "$START_OF_MONTH" --end-date "$TODAY" --query 'Items[].pretaxCost' --output tsv | awk '{s+=$1} END {print s}')
+usage_data=$(az consumption usage list --start-date "$START_OF_MONTH" --end-date "$TODAY" --query '[].pretaxCost' --output tsv)
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to retrieve current cost."
+    exit 1
+fi
+
+CURRENT_COST=$(echo "$usage_data" | awk '{s+=$1} END {print s}')
 
 # Check if the current cost exceeds the budget
 if [[ -z "$CURRENT_COST" ]]; then
