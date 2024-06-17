@@ -14,6 +14,11 @@ az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --t
 CURRENT_COST=$(az consumption usage list --query '[].pretaxCost' --output tsv | awk '{s+=$1} END {print s}')
 
 # Check if the current cost exceeds the budget
+if [[ -z "$CURRENT_COST" ]]; then
+    echo "Error: Failed to retrieve current cost."
+    exit 1
+fi
+
 if (( $(echo "$CURRENT_COST > $BUDGET" | bc -l) )); then
     echo "Alert: Azure cost has exceeded the budget of $BUDGET. Current cost: $CURRENT_COST"
     # Send a notification to Microsoft Teams (You need to have TEAMS_WEBHOOK_URL configured in your GitHub Secrets)
