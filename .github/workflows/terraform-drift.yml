@@ -17,7 +17,7 @@ on:
 
 env:
    workdir: "Docker/infrastructure/scripts/"
-   tf_wordir: Docker/infrastructure/'
+   tf_wordir: 'Docker/infrastructure/'
    TF_VAR_client_secret: "${{ secrets.client_secret }}"
    TF_VAR_slack_webhook_url: "${{ secrets.client_secret }}"
 
