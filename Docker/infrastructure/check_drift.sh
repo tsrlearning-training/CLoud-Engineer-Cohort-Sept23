@@ -4,16 +4,16 @@ AZURE_CLIENT_ID=$1
 AZURE_CLIENT_SECRET=$2
 AZURE_TENANT_ID=$3
 SLACK_WEBHOOK_URL=$4
-DIR=$5
+
 
 # Log in to Azure using service principal
 az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID"
 
 # Initialize Terraform
-cd $DIR && terraform init
+terraform init
 
 # Run Terraform Plan
-cd $DIR &&  terraform plan -detailed-exitcode > plan_output.txt
+terraform plan -detailed-exitcode > plan_output.txt
 PLAN_EXIT_CODE=$?
 
 if [ $PLAN_EXIT_CODE -eq 2 ]; then
