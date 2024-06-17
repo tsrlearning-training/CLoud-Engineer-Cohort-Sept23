@@ -15,6 +15,7 @@ env:
   # AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
   # AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
   # TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+   workdir: "Docker/infrastructure/scripts/"
    TF_VAR_client_secret: "${{ secrets.client_secret }}"
 
 jobs:
