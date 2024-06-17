@@ -1,16 +1,23 @@
 #!/bin/bash
+set -x
 
 AZURE_CLIENT_ID=$1
 AZURE_CLIENT_SECRET=$2
 AZURE_TENANT_ID=$3
 SLACK_WEBHOOK_URL=$4
+AZURE_SUBSCRIPTION_ID=$5
 
+# Set environment variables for Terraform authentication
+export ARM_CLIENT_ID=$AZURE_CLIENT_ID
+export ARM_CLIENT_SECRET=$AZURE_CLIENT_SECRET
+export ARM_TENANT_ID=$AZURE_TENANT_ID
+export ARM_SUBSCRIPTION_ID=$AZURE_SUBSCRIPTION_ID
 
 # Log in to Azure using service principal
 az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID"
 
 # Initialize Terraform
-terraform init
+terraform init -reconfigure
 
 # Run Terraform Plan
 terraform plan -detailed-exitcode > plan_output.txt
