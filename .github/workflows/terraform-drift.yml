@@ -8,7 +8,7 @@ on:
 
     paths:
       - 'terraform-drift.yml'
-      - 'Docker/infrastructure/scripts/**'
+      - 'Docker/infrastructure/**'
       - 'Docker/infrastructure/**'
 
   schedule:
@@ -16,7 +16,7 @@ on:
 
 
 env:
-   workdir: "Docker/infrastructure/scripts/"
+   workdir: "Docker/infrastructure/"
    TF_VAR_client_secret: "${{ secrets.client_secret }}"
    TF_VAR_slack_webhook_url: "${{ secrets.client_secret }}"
 
