@@ -25,7 +25,7 @@ az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --t
 # cd $TF_DIR
 
 # Initialize Terraform backend
-terraform init -backend-config="backend.tf"
+terraform init
 
 # Run Terraform Plan
 terraform plan -detailed-exitcode > plan_output.txt
