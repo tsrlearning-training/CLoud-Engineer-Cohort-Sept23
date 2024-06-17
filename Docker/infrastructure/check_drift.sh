@@ -17,7 +17,7 @@ export ARM_SUBSCRIPTION_ID=$AZURE_SUBSCRIPTION_ID
 az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID"
 
 # Initialize Terraform
-terraform init -reconfigure
+terraform init
 
 # Run Terraform Plan
 terraform plan -detailed-exitcode > plan_output.txt
