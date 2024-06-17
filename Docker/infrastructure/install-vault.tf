@@ -4,7 +4,7 @@ resource "null_resource" "vault_install" {
     connection {
       type        = "ssh"
       user        = "tsrlearning"
-      private_key = var.private_key
+      private_key = file("tsrlearningkey")  #var.private_key
       host        = azurerm_public_ip.vm_2.ip_address
     }
 
@@ -16,7 +16,7 @@ resource "null_resource" "vault_install" {
     connection {
       type        = "ssh"
       user        = "tsrlearning"
-      private_key = var.private_key
+      private_key = file("tsrlearningkey") #var.private_key
       host        = azurerm_public_ip.vm_2.ip_address
     }
 

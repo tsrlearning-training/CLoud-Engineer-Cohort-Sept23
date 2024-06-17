@@ -3,7 +3,7 @@ resource "null_resource" "docker-install" {
     connection {
       type        = "ssh"
       user        = "tsrlearning"
-      private_key = var.private_key
+      private_key = file("tsrlearningkey") #var.private_key
       host        = azurerm_public_ip.vm_1.ip_address
     }
 

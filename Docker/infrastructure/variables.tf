@@ -33,6 +33,6 @@ variable "vm_username" {
   default     = "tsrlearning"
 }
 
-variable "private_key" {
-  type = string
-}
+# variable "private_key" {
+#   type = string
+# }
