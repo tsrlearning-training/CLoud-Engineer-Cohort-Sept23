@@ -43,3 +43,4 @@ jobs:
         #   AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
         #   TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
          TF_VAR_client_secret: "${{ secrets.client_secret }}"
+         
