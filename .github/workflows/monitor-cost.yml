@@ -3,7 +3,7 @@ name: Scheduled Azure Cost Monitoring
 on:
   push:
     branches:
-      - 'tsrlearningdev'
+      - 'tsrlearnindev'
       - 'monitor_cost.yml'
   # schedule:
     # - cron: '0 0 * * *' # This runs the workflow daily at midnight UTC
