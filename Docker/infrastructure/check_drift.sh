@@ -1,26 +1,33 @@
 #!/bin/bash
 set -x
 
+# Variables
 AZURE_CLIENT_ID=$1
 AZURE_CLIENT_SECRET=$2
 AZURE_TENANT_ID=$3
 SLACK_WEBHOOK_URL=$4
 AZURE_SUBSCRIPTION_ID=$5
-STORAGE_ACCOUNT_KEY=$6
+STORAGE_ACCOUNT_NAME="tsrlearningstor"
+CONTAINER_NAME="terraformstate"
+# TF_DIR=$8
 
 # Set environment variables for Terraform authentication
 export ARM_CLIENT_ID=$AZURE_CLIENT_ID
 export ARM_CLIENT_SECRET=$AZURE_CLIENT_SECRET
 export ARM_TENANT_ID=$AZURE_TENANT_ID
 export ARM_SUBSCRIPTION_ID=$AZURE_SUBSCRIPTION_ID
-export ARM_STORAGE_ACCOUNT_KEY=$STORAGE_ACCOUNT_KEY
-
 
 # Log in to Azure using service principal
 az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID"
 
-# Initialize Terraform
-terraform init
+# # Navigate to the Terraform directory
+# cd $TF_DIR
+
+# Initialize Terraform backend
+terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT_NAME" \
+               -backend-config="container_name=$CONTAINER_NAME" \
+               -backend-config="key=dev.terraform.tfstate" \
+               -backend-config="subscription_id=$AZURE_SUBSCRIPTION_ID"
 
 # Run Terraform Plan
 terraform plan -detailed-exitcode > plan_output.txt
