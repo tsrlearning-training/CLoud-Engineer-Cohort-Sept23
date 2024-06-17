@@ -4,11 +4,15 @@ on:
   push:
     branches:
       - 'tsrlearnindev'
-  # schedule:
-    # - cron: '0 0 * * *' # This runs the workflow daily at midnight UTC
+      - 'main'
+
     paths:
       - 'monitor-cost.yml'
       - 'Docker/infrastructure/scripts/**'
+
+  schedule:
+    - cron: '0 0 * * *' # This runs the workflow daily at midnight UTC
+
 
 env:
   # AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
