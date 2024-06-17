@@ -3,6 +3,10 @@
 # Variables
 BUDGET=20
 CURRENT_COST=0
+AZURE_CLIENT_ID=$1
+AZURE_CLIENT_SECRET=$2
+AZURE_TENANT_ID=$3
+
 
 # Log in to Azure using service principal
 az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID"
