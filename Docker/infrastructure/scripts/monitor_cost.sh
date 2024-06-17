@@ -7,11 +7,16 @@ AZURE_CLIENT_ID=$1
 AZURE_CLIENT_SECRET=$2
 AZURE_TENANT_ID=$3
 
+# Get the current date in YYYY-MM-DD format
+TODAY=$(date +%Y-%m-%d)
+# Get the first day of the current month in YYYY-MM-DD format
+START_OF_MONTH=$(date +%Y-%m-01)
+
 # Log in to Azure using service principal
 az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID"
 
 # Get the current month's cost
-CURRENT_COST=$(az consumption usage list --query '[].pretaxCost' --output tsv | awk '{s+=$1} END {print s}')
+CURRENT_COST=$(az consumption usage list --start-date "$START_OF_MONTH" --end-date "$TODAY" --query '[].pretaxCost' --output tsv | awk '{s+=$1} END {print s}')
 
 # Check if the current cost exceeds the budget
 if [[ -z "$CURRENT_COST" ]]; then
