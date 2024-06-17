@@ -56,4 +56,3 @@ if (( $(echo "$CURRENT_COST > $BUDGET" | bc -l) )); then
 else
     echo "Azure cost is within the budget. Current cost: $CURRENT_COST"
 fi
-

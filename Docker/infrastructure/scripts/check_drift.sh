@@ -11,10 +11,10 @@ DIR=$5
 az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID"
 
 # Initialize Terraform
-cd $DIR && terraform init
+terraform init
 
 # Run Terraform Plan
-cd $DIR &&  terraform plan -detailed-exitcode > plan_output.txt
+terraform plan -detailed-exitcode > plan_output.txt
 PLAN_EXIT_CODE=$?
 
 if [ $PLAN_EXIT_CODE -eq 2 ]; then
