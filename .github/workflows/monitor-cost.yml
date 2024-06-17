@@ -38,7 +38,7 @@ jobs:
 
       - name: Run cost monitoring script
         run: |
-          cd ${{ env.workdir }} && sudo chmod +x ./monitor_cost.sh && ./monitor_cost.sh "$AZURE_CLIENT_ID=b26145ad-4bdc-4af7-bc86-8dc3d89e9d4e" "$AZURE_CLIENT_SECRET=${{ secrets.client_secret }}" "$AZURE_TENANT_ID=389dc11c-508a-4f1e-a529-1f19aa1a8e7b"
+          cd ${{ env.workdir }} && sudo chmod +x ./monitor_cost.sh && ./monitor_cost.sh "b26145ad-4bdc-4af7-bc86-8dc3d89e9d4e" "${{ secrets.client_secret }}" "389dc11c-508a-4f1e-a529-1f19aa1a8e7b"
         env:
         #   AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
         #   AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
