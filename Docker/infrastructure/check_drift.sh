@@ -1,7 +1,6 @@
 #!/bin/bash
 set -x
 
-# Variables
 AZURE_CLIENT_ID=$1
 AZURE_CLIENT_SECRET=$2
 AZURE_TENANT_ID=$3
