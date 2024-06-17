@@ -41,3 +41,4 @@ else
     echo "Error running terraform plan"
     exit 1
 fi
+
