@@ -36,3 +36,7 @@ variable "vm_username" {
 # variable "private_key" {
 #   type = string
 # }
+
+variable "SLACK_WEBHOOK_URL" {
+  type = string
+}

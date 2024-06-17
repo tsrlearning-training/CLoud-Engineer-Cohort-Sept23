@@ -7,6 +7,7 @@ AZURE_CLIENT_ID=$1
 AZURE_CLIENT_SECRET=$2
 AZURE_TENANT_ID=$3
 AZURE_SUBSCRIPTION_ID=$4
+SLACK_WEBHOOK_URL=$5
 
 # Get the current date in YYYY-MM-DD format
 TODAY=$(date +%Y-%m-%d)
@@ -49,9 +50,9 @@ fi
 
 if (( $(echo "$CURRENT_COST > $BUDGET" | bc -l) )); then
     echo "Alert: Azure cost has exceeded the budget of $BUDGET. Current cost: $CURRENT_COST"
-    # Send a notification to Microsoft Teams (You need to have TEAMS_WEBHOOK_URL configured in your GitHub Secrets)
-    PAYLOAD=$( jq -n --arg msg "Alert: Azure cost has exceeded the budget of $BUDGET. Current cost: $CURRENT_COST" '{ text: $msg }' )
-    curl -H "Content-Type: application/json" -d "$PAYLOAD" "$TEAMS_WEBHOOK_URL"
+    # Send a notification to Slack (You need to have SLACK_WEBHOOK_URL configured in your GitHub Secrets)
+    PAYLOAD=$( jq -n --arg text "Alert: Azure cost has exceeded the budget of $BUDGET. Current cost: $CURRENT_COST" '{ text: $text }' )
+    curl -X POST -H "Content-Type: application/json" -d "$PAYLOAD" "$SLACK_WEBHOOK_URL"
 else
     echo "Azure cost is within the budget. Current cost: $CURRENT_COST"
 fi
