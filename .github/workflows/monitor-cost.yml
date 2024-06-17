@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - 'tsrlearnindev'
-      - 'monitor_cost.yml'
   # schedule:
     # - cron: '0 0 * * *' # This runs the workflow daily at midnight UTC
     paths:
+      - 'monitor_cost.yml'
       - 'Docker/infrastructure/scripts'
 
 env:
