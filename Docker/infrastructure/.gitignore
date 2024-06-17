@@ -39,7 +39,11 @@ tsrlearning-key
 demotsrlearning.com_cert/
 demotsrlearning.com_key/
 tsrlearningkey
-tsrlearning.link_cert/
+tsrlearning.link_cert/tsrlearning.link.ca-bundle
+tsrlearning.link_cert/tsrlearning.link.crt
+tsrlearning.link_cert/tsrlearning.link.key.txt
+tsrlearning.link_cert/ttsrlearning.link.p7b
+
 ../React-App-MySQL
 ../../Resume-Generator
 ../../Kubeadmin
