@@ -9,8 +9,6 @@ SLACK_WEBHOOK_URL=$4
 AZURE_SUBSCRIPTION_ID=$5
 STORAGE_ACCOUNT_KEY=$6
 
-# TF_DIR=$8
-
 # Set environment variables for Terraform authentication
 export ARM_CLIENT_ID=$AZURE_CLIENT_ID
 export ARM_CLIENT_SECRET=$AZURE_CLIENT_SECRET
