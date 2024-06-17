@@ -16,8 +16,30 @@ START_OF_MONTH=$(date +%Y-%m-01)
 # Log in to Azure using service principal
 az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID"
 
+# Construct the query JSON
+query=$(cat <<EOF
+{
+    "type": "ActualCost",
+    "timeframe": "Custom",
+    "timePeriod": {
+        "from": "$START_OF_MONTH",
+        "to": "$TODAY"
+    },
+    "dataset": {
+        "granularity": "None",
+        "aggregation": {
+            "totalCost": {
+                "name": "PreTaxCost",
+                "function": "Sum"
+            }
+        }
+    }
+}
+EOF
+)
+
 # Run the query and get the current month's cost
-CURRENT_COST=$(az consumption pricesheet show --query "Items[].PretaxCost" --output tsv | awk '{s+=$1} END {print s}')
+CURRENT_COST=$(az rest --method post --url "https://management.azure.com/subscriptions/$AZURE_SUBSCRIPTION_ID/providers/Microsoft.CostManagement/query?api-version=2019-11-01" --body "$query" --output tsv --query "properties.rows[0][0]")
 
 # Check if the current cost exceeds the budget
 if [[ -z "$CURRENT_COST" ]]; then
