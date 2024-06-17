@@ -24,10 +24,10 @@ az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --t
 # cd $TF_DIR
 
 # Initialize Terraform backend
-terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT_NAME" \
-               -backend-config="container_name=$CONTAINER_NAME" \
-               -backend-config="key=dev.terraform.tfstate" \
-               -backend-config="subscription_id=$AZURE_SUBSCRIPTION_ID"
+terraform init -backend-config="$STORAGE_ACCOUNT_NAME" \
+               -backend-config="$CONTAINER_NAME" \
+               -backend-config="dev.terraform.tfstate" \
+               -backend-config="$AZURE_SUBSCRIPTION_ID"
 
 # Run Terraform Plan
 terraform plan -detailed-exitcode > plan_output.txt
