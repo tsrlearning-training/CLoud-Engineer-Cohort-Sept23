@@ -6,6 +6,7 @@ CURRENT_COST=0
 AZURE_CLIENT_ID=$1
 AZURE_CLIENT_SECRET=$2
 AZURE_TENANT_ID=$3
+AZURE_SUBSCRIPTION_ID=$4
 
 # Get the current date in YYYY-MM-DD format
 TODAY=$(date +%Y-%m-%d)
@@ -16,13 +17,7 @@ START_OF_MONTH=$(date +%Y-%m-01)
 az login --service-principal -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID"
 
 # Get the current month's cost
-CURRENT_COST=$(az consumption cost management query \
-  --scope "/subscriptions/$AZURE_SUBSCRIPTION_ID" \
-  --type "ActualCost" \
-  --timeframe "Custom" \
-  --time-period "{\"from\":\"$START_OF_MONTH\",\"to\":\"$TODAY\"}" \
-  --dataset-aggregation "totalCost=sum(cost)" \
-  --output tsv --query "properties.rows[0].totalCost")
+CURRENT_COST=$(az consumption usage list --start-date "$START_OF_MONTH" --end-date "$TODAY" --query '[].pretaxCost' --output tsv | awk '{s+=$1} END {print s}')
 
 # Check if the current cost exceeds the budget
 if [[ -z "$CURRENT_COST" ]]; then
