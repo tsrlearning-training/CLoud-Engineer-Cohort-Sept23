@@ -18,6 +18,7 @@ env:
    workdir: "Docker/infrastructure/"
    TF_VAR_client_secret: "${{ secrets.client_secret }}"
    TF_VAR_slack_webhook_url: "${{ secrets.client_secret }}"
+   TF_VAR_storage_account_key: "${{ secrets.storage_account_key }}"
 
 jobs:
   Monitor-Azure-Cost:
@@ -45,4 +46,5 @@ jobs:
         env:
          TF_VAR_client_secret: "${{ secrets.client_secret }}"
          TF_VAR_slack_webhook_url: "${{ secrets.client_secret }}"
+         TF_VAR_storage_account_key: "${{ secrets.storage_account_key }}"
 

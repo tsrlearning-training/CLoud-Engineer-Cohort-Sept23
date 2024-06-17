@@ -17,7 +17,7 @@ variable "login_username" {
 }
 
 variable "login_password" {
-  type    = string
+  type = string
 }
 
 # provider "vault" {

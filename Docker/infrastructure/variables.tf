@@ -40,3 +40,7 @@ variable "vm_username" {
 variable "SLACK_WEBHOOK_URL" {
   type = string
 }
+
+variable "storage_account_key" {
+  type = string
+}
