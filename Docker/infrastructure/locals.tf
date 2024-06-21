@@ -17,13 +17,13 @@ locals {
       admin_username = "tsrlearning"
       public_key     = file("tsrlearningkey.pub")
     },
-    vm-2 = {
-      name           = data.azurecaf_name.vm_2.result
-      size           = "Standard_F2"
-      admin_username = "tsrlearning"
-      username       = "tsrlearning"
-      public_key     = file("tsrlearningkey.pub")
-    },
+    # vm-2 = {
+    #   name           = data.azurecaf_name.vm_2.result
+    #   size           = "Standard_F2"
+    #   admin_username = "tsrlearning"
+    #   username       = "tsrlearning"
+    #   public_key     = file("tsrlearningkey.pub")
+    # },
     # vm-3 = {
     #   name           = data.azurecaf_name.vm_3.result
     #   size           = "Standard_F2"
