@@ -44,4 +44,3 @@ variable "vm_username" {
 # variable "storage_account_key" {
 #   type = string
 # }
-
