@@ -37,6 +37,11 @@ variable "vm_username" {
 #   type = string
 # }
 
-variable "SLACK_WEBHOOK_URL" {
-  type = string
-}
+# variable "SLACK_WEBHOOK_URL" {
+#   type = string
+# }
+
+# variable "storage_account_key" {
+#   type = string
+# }
+

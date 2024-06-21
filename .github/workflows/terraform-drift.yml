@@ -1,4 +1,4 @@
-name: Scheduled Azure Cost Monitoring
+name: Scheduled Terraform Drift Detection
 
 on:
   push:
@@ -7,17 +7,18 @@ on:
       - 'main'
 
     paths:
-      - 'monitor-cost.yml'
-      - 'Docker/infrastructure/scripts/**'
+      - 'terraform-drift.yml'
+      - 'Docker/infrastructure/**'
 
   schedule:
-    - cron: '*/5 * * * *' # This runs the workflow every 5 minutes
+    - cron: '0 0 * * *' # This runs the workflow daily at midnight UTC
 
 
 env:
-   workdir: "Docker/infrastructure/scripts/"
+   workdir: "Docker/infrastructure/"
    TF_VAR_client_secret: "${{ secrets.client_secret }}"
    TF_VAR_slack_webhook_url: "${{ secrets.client_secret }}"
+   TF_VAR_storage_account_key: "${{ secrets.STORAGE_ACCOUNT_KEY }}"
 
 jobs:
   Monitor-Azure-Cost:
@@ -39,10 +40,13 @@ jobs:
       - name: List
         run: ls -l
 
-      - name: Run cost monitoring script
+      - name: Run Terraform Drift Detection
         run: |
-          cd ${{ env.workdir }} && sudo chmod +x ./monitor_cost.sh && ./monitor_cost.sh "b26145ad-4bdc-4af7-bc86-8dc3d89e9d4e" "${{ secrets.client_secret }}" "389dc11c-508a-4f1e-a529-1f19aa1a8e7b" "f823a9e2-b296-41ab-b452-5f2c01eefae8" "${{ secrets.SLACK_WEBHOOK_URL }}" 
+          cd ${{ env.workdir }} && sudo chmod +x ./check_drift.sh && ./check_drift.sh "b26145ad-4bdc-4af7-bc86-8dc3d89e9d4e" "${{ secrets.client_secret }}" "389dc11c-508a-4f1e-a529-1f19aa1a8e7b" "${{ secrets.SLACK_WEBHOOK_URL }}" "f823a9e2-b296-41ab-b452-5f2c01eefae8" ${{ secrets.STORAGE_ACCOUNT_KEY }} "${{ secrets.SLACK_WEBHOOK_URL }}"
         env:
          TF_VAR_client_secret: "${{ secrets.client_secret }}"
          TF_VAR_slack_webhook_url: "${{ secrets.client_secret }}"
+         TF_VAR_storage_account_key: "${{ secrets.STORAGE_ACCOUNT_KEY }}"
+         TF_VAR_login_password: "${{ secrets.login_password }}"
+         TF_VAR_SLACK_WEBHOOK_URL: "${{ secrets.SLACK_WEBHOOK_URL }}"
 
