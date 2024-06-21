@@ -78,7 +78,7 @@ jobs:
 
       - name: Terraform Apply
         if: ${{ github.ref == 'refs/heads/main' && steps.check_destroy.outputs.contain_destroy != 'true' }}
-        run: terraform apply -auto-approve tfplan
+        run: cd ${{ env.workdir }} && terraform apply -auto-approve tfplan
         env:
           TF_VAR_private_key: "${{ secrets.private_key }}"
           TF_VAR_client_secret: "${{ secrets.client_secret }}"
