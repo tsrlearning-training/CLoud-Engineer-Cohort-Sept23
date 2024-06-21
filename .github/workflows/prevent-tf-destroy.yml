@@ -1,6 +1,4 @@
 name: Create Terraform code for tf-infrastructure folder
-
-
 on:
   push:
     branches:
