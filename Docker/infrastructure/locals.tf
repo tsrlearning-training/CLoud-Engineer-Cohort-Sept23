@@ -7,7 +7,7 @@ locals {
     casecode    = "tsr2024"
   }
 
-  db_name = "tsrlearningdb"
+  # db_name = "tsrlearningdb"
 
   virtual_machines = {
     vm-1 = {
