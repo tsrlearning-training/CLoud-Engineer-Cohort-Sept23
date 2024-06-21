@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - tsrlearnindev
-      # - main
+      - main
     paths:
       - "Docker/infrastructure/**"
       - ".github/workflows/tf-infrastructure-deployment.yml"
