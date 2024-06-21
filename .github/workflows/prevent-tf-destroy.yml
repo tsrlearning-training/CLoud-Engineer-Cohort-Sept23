@@ -59,7 +59,7 @@ jobs:
       - name: Check for Destroy in Plan
         id: check_destroy
         run: |
-          cd ${{ env.workdir }} && terraform show -json tfplan | jq -r '.resource_changes[] | select(.change.actions | index("delete"))' > destroy_plan.txt
+         cd ${{ env.workdir }} && terraform show -json tfplan | jq '.resource_changes[] | select(.actions=="delete")' > destroy_plan.txt
           if [ -s destroy_plan.txt ]; then
             echo "Terraform plan contains destroy actions. Failing the job."
             exit 1
