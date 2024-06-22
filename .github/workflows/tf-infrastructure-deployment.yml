@@ -21,7 +21,8 @@ env:
 
 jobs:
   Terrraform-deployments:
-    runs-on: ubuntu-latest
+    runs-on:
+      self-hosted: ghrunner01
 
     steps:
       - name: Git checkout
