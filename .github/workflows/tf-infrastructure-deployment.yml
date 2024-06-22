@@ -33,8 +33,16 @@ jobs:
           node-version: '20'
 
       - name: Copy private key to runner
-        run: echo "${{ secrets.private_key }}" > $HOME/.ssh/tsrlearningkey
+        run: |
+          echo "${{ secrets.private_key }}" > $HOME/.ssh/tsrlearningkey
+          chmod 600 $HOME/.ssh/tsrlearningkey
         shell: bash
+
+      - name: Add server to known hosts
+        run: |
+          server_ip=$(curl -s http://whatismyip.akamai.com/)
+          ssh-keyscan $server_ip >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
 
       - name: Terraform install version
         uses: hashicorp/setup-terraform@v3
