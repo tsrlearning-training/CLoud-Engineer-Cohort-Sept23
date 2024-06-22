@@ -8,6 +8,7 @@ locals {
   }
 
   # db_name = "tsrlearningdb"
+  custom_data = var.custom_data
 
   virtual_machines = {
     vm-1 = {
