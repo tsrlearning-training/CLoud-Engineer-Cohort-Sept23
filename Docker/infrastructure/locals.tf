@@ -24,13 +24,13 @@ locals {
     #   username       = "tsrlearning"
     #   public_key     = file("tsrlearningkey.pub")
     # },
-    # vm-3 = {
-    #   name           = data.azurecaf_name.vm_3.result
-    #   size           = "Standard_F2"
-    #   admin_username = "tsrlearning"
-    #   username       = "tsrlearning"
-    #   public_key     = file("tsrlearningkey.pub")
-    # }
+    vm-3 = {
+      name           = "ghrunner01"
+      size           = "Standard_F2"
+      admin_username = "tsrlearning"
+      username       = "tsrlearning"
+      public_key     = file("tsrlearningkey.pub")
+    }
   }
   network_interface_ids = {
     vm-1 = {
@@ -45,9 +45,9 @@ locals {
     #   subnet_id            = module.subnet.snet_id
     # },
 
-    # vm-3 = {
-    #   name                 = data.azurecaf_name.nic_3.result
-    #   public_ip_address_id = azurerm_public_ip.vm_3.id
-    # }
+    vm-3 = {
+      name                 = data.azurecaf_name.nic_3.result
+      public_ip_address_id = azurerm_public_ip.vm_3.id
+    }
   }
 }

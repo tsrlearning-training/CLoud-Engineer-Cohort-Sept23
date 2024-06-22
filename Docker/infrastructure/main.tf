@@ -48,6 +48,13 @@ resource "azurerm_public_ip" "vm_2" {
   allocation_method   = "Static"
 }
 
+resource "azurerm_public_ip" "vm_3" {
+  name                = "vm3publicIP"
+  resource_group_name = module.resource_group.rg_name
+  location            = module.resource_group.rg_location
+  allocation_method   = "Static"
+}
+
 resource "azurerm_network_interface" "nic" {
   for_each            = local.network_interface_ids
   name                = each.value.name
