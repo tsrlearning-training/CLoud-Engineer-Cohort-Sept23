@@ -33,11 +33,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Copy private key to runner
-        run: |
-          echo "${{ secrets.private_key }}" > $HOME/.ssh/tsrlearningkey
-          chmod 600 $HOME/.ssh/tsrlearningkey
-        shell: bash
+      # - name: Copy private key to runner
+      #   run: |
+      #     echo "${{ secrets.private_key }}" > $HOME/.ssh/tsrlearningkey
+      #     chmod 600 $HOME/.ssh/tsrlearningkey
+      #   shell: bash
 
       # - name: Add server to known hosts
       #   run: |
