@@ -46,19 +46,25 @@ jobs:
         run: cd ${{ env.workdir }} && terraform fmt .
         env:
           TF_VAR_client_secret: "${{ secrets.client_secret }}"
-          
+          AZURE_CLIENT_ID: b26145ad-4bdc-4af7-bc86-8dc3d89e9d4e
+          AZURE_TENANT_ID: 389dc11c-508a-4f1e-a529-1f19aa1a8e7b
+
       - name: terraform validate
         run: cd ${{ env.workdir }} && terraform validate
         env:
           TF_VAR_private_key: "${{ secrets.private_key }}"
           TF_VAR_client_secret: "${{ secrets.client_secret }}"
-      
+          AZURE_CLIENT_ID: b26145ad-4bdc-4af7-bc86-8dc3d89e9d4e
+          AZURE_TENANT_ID: 389dc11c-508a-4f1e-a529-1f19aa1a8e7b
+
       - name: terraform plan
         run: cd ${{ env.workdir }} && terraform plan -no-color
         env:
           TF_VAR_private_key: "${{ secrets.private_key }}"
           TF_VAR_client_secret: "${{ secrets.client_secret }}"
           TF_VAR_login_password: "${{ secrets.login_password }}"
+          AZURE_CLIENT_ID: b26145ad-4bdc-4af7-bc86-8dc3d89e9d4e
+          AZURE_TENANT_ID: 389dc11c-508a-4f1e-a529-1f19aa1a8e7b
 
       - name: terraform apply
         run: cd ${{ env.workdir }} && terraform apply -auto-approve
@@ -66,4 +72,5 @@ jobs:
           TF_VAR_private_key: "${{ secrets.private_key }}"
           TF_VAR_client_secret: "${{ secrets.client_secret }}"
           TF_VAR_login_password: "${{ secrets.login_password }}"
-
+          AZURE_CLIENT_ID: b26145ad-4bdc-4af7-bc86-8dc3d89e9d4e
+          AZURE_TENANT_ID: 389dc11c-508a-4f1e-a529-1f19aa1a8e7b
