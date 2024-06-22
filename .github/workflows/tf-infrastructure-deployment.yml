@@ -39,10 +39,14 @@ jobs:
 
       - name: terraform init
         run: cd ${{ env.workdir }} && terraform init
+        env:
+          TF_VAR_client_secret: "${{ secrets.client_secret }}"
 
       - name: terraform fmt
         run: cd ${{ env.workdir }} && terraform fmt .
-
+        env:
+          TF_VAR_client_secret: "${{ secrets.client_secret }}"
+          
       - name: terraform validate
         run: cd ${{ env.workdir }} && terraform validate
         env:
