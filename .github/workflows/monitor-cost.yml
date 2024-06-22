@@ -11,7 +11,7 @@ on:
       - 'Docker/infrastructure/scripts/**'
 
   schedule:
-    - cron: '*/5 * * * *' # This runs the workflow every 5 minutes
+    - cron: '0 0 * * *' # This runs the workflow daily at midnight UTC
 
 
 env:
