@@ -38,27 +38,27 @@ jobs:
           chmod 600 $HOME/.ssh/tsrlearningkey
         shell: bash
 
-      - name: Add server to known hosts
-        run: |
-          set -x
-          echo "Fetching public IP address..."
-          server_ip=$(curl -s http://whatismyip.akamai.com/)
-          if [ -z "$server_ip" ]; then
-            echo "Failed to fetch public IP address"
-            exit 1
-          fi
-          echo "Public IP address: $server_ip"
-          echo "Checking ssh-keyscan availability..."
+      # - name: Add server to known hosts
+      #   run: |
+      #     set -x
+      #     echo "Fetching public IP address..."
+      #     server_ip=$(curl -s http://whatismyip.akamai.com/)
+      #     if [ -z "$server_ip" ]; then
+      #       echo "Failed to fetch public IP address"
+      #       exit 1
+      #     fi
+      #     echo "Public IP address: $server_ip"
+      #     echo "Checking ssh-keyscan availability..."
 
-          if ! command -v ssh-keyscan &> /dev/null; then
-            echo "ssh-keyscan could not be found"
-            exit 1
-          fi
-          
-          echo "Adding server to known hosts..."
-          ssh-keyscan $server_ip >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-          echo "Server added to known hosts successfully"
+      #     if ! command -v ssh-keyscan &> /dev/null; then
+      #       echo "ssh-keyscan could not be found"
+      #       exit 1
+      #     fi
+
+      #     echo "Adding server to known hosts..."
+      #     ssh-keyscan $server_ip >> ~/.ssh/known_hosts
+      #     chmod 644 ~/.ssh/known_hosts
+      #     echo "Server added to known hosts successfully"
 
       - name: Terraform install version
         uses: hashicorp/setup-terraform@v3
