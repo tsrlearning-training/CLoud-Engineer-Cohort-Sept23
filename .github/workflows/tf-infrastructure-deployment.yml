@@ -26,7 +26,12 @@ jobs:
     steps:
       - name: Git checkout
         uses: actions/checkout@v4
-      
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Terraform install version
         uses: hashicorp/setup-terraform@v3
         with:
