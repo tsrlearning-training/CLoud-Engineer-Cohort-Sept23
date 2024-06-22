@@ -44,3 +44,4 @@ variable "private_key" {
 # variable "storage_account_key" {
 #   type = string
 # }
+
