@@ -4,7 +4,7 @@ resource "null_resource" "docker-install" {
       type        = "ssh"
       user        = "tsrlearning"
       private_key = var.private_key
-      host        = azurerm_linux_virtual_machine.vm.private_ip_address[0]
+      host        = azurerm_linux_virtual_machine.vm["vm-1"].private_ip_address
     }
 
     inline = [
