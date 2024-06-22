@@ -48,6 +48,7 @@ locals {
     vm-3 = {
       name                 = data.azurecaf_name.nic_3.result
       public_ip_address_id = azurerm_public_ip.vm_3.id
+      subnet_id            = module.subnet.snet_id
     }
   }
 }
