@@ -21,7 +21,7 @@ env:
 
 jobs:
   Terrraform-deployments:
-    runs-on: [self-hosted, linux, x64, ghrunner01]
+    runs-on: [self-hosted, linux, x64]
 
     steps:
       - name: Git checkout
