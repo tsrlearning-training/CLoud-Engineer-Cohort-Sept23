@@ -11,7 +11,7 @@ on:
 env:
   terraform_version: "1.1.7"
   workdir: "Docker/infrastructure/"
-  TF_custom_data: "${{ github.workspace }}/${{ env.workdir }}/scripts/install_docker.sh"
+  TF_VAR_custom_data: "${{ github.workspace }}/${{ env.workdir }}/scripts/install_docker.sh"
   TF_VAR_private_key: ${{ secrets.private_key }}
   TF_VAR_client_secret: "${{ secrets.client_secret }}"
   TF_VAR_login_password: "${{ secrets.login_password }}"
