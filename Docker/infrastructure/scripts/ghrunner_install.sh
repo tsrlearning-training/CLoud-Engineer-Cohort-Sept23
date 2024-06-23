@@ -39,9 +39,8 @@ RUNNER_TOKEN=$(jq -r '.token' response.json)
 echo "RUNNER_TOKEN: $RUNNER_TOKEN"
 
 # Change ownership to the current user
-sudo chown -R $USER:$USER ~/actions-runner
+sudo chown -R $USER:$USER /actions-runner
 
-# Using Expect to run the GitHub Actions runner configuration
 echo "Using Expect to run GitHub Actions runner configuration"
 expect << EOF
 set timeout -1
