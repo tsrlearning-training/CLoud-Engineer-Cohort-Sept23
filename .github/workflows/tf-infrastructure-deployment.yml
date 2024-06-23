@@ -34,6 +34,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Whitelist public Runner
+        run: |
+          sudo chmod +x "${{ github.workspace }}/Docker/infrastructure/scripts/ghrunner_ipwhitelisting.sh"
+          bash "${{ github.workspace }}/Docker/infrastructure/scripts/ghrunner_ipwhitelisting.sh"
 
       - name: Terraform install version
         uses: hashicorp/setup-terraform@v3
