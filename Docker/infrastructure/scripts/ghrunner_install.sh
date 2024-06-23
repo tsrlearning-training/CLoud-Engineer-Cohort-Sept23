@@ -20,7 +20,10 @@ echo "RUNNER_TAR: ${RUNNER_TAR}"
 echo "TOKEN: ${TOKEN}"
 
 
-sudo mkdir -p "$HOME/actions-runner" && sudo chown -R $USER:$USER "$HOME/actions-runner" && cd actions-runner
+# Create a folder and navigate into it
+mkdir -p "$HOME/actions-runner" && cd "$HOME/actions-runner"
+
+# Debug: Print current directory
 echo "Current directory: $(pwd)"
 
 curl -o actions-runner-linux-x64-2.317.0.tar.gz -L "${RUNNER_URL}"
