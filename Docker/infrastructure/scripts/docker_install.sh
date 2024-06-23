@@ -1,4 +1,5 @@
 #!/bin/bash
+exec > >(sudo tee -a docker_install.log) 2>&1
 
 # Update apt package index
 sudo apt-get -y update

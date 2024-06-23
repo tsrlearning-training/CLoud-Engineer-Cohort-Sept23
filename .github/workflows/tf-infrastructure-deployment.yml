@@ -11,7 +11,6 @@ on:
 env:
   terraform_version: "1.1.7"
   workdir: "Docker/infrastructure/"
-  TF_VAR_custom_data: "${{ github.workspace }}/Docker/infrastructure/scripts/install_docker.sh"
   TF_VAR_private_key: ${{ secrets.private_key }}
   TF_VAR_client_secret: "${{ secrets.client_secret }}"
   TF_VAR_login_password: "${{ secrets.login_password }}"
@@ -19,6 +18,9 @@ env:
   ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
   ARM_TENANT_ID: 389dc11c-508a-4f1e-a529-1f19aa1a8e7b
   ARM_SUBSCRIPTION_ID: f823a9e2-b296-41ab-b452-5f2c01eefae8
+  TF_VAR_custom_data_vm_1: "${{ github.workspace }}/Docker/infrastructure/scripts/docker_install.sh"
+  TF_VAR_custom_data_vm_2: "${{ github.workspace }}/Docker/infrastructure/scripts/vault_install.sh"
+  TF_VAR_custom_data_vm_3: "${{ github.workspace }}/Docker/infrastructure/scripts/ghrunner_install.sh"
 
 jobs:
   Terrraform-deployments:
@@ -32,34 +34,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      # - name: Copy private key to runner
-      #   run: |
-      #     echo "${{ secrets.private_key }}" > $HOME/.ssh/tsrlearningkey
-      #     chmod 600 $HOME/.ssh/tsrlearningkey
-      #   shell: bash
-
-      # - name: Add server to known hosts
-      #   run: |
-      #     set -x
-      #     echo "Fetching public IP address..."
-      #     server_ip=$(curl -s http://whatismyip.akamai.com/)
-      #     if [ -z "$server_ip" ]; then
-      #       echo "Failed to fetch public IP address"
-      #       exit 1
-      #     fi
-      #     echo "Public IP address: $server_ip"
-      #     echo "Checking ssh-keyscan availability..."
-
-      #     if ! command -v ssh-keyscan &> /dev/null; then
-      #       echo "ssh-keyscan could not be found"
-      #       exit 1
-      #     fi
-
-      #     echo "Adding server to known hosts..."
-      #     ssh-keyscan $server_ip >> ~/.ssh/known_hosts
-      #     chmod 644 ~/.ssh/known_hosts
-      #     echo "Server added to known hosts successfully"
 
       - name: Terraform install version
         uses: hashicorp/setup-terraform@v3

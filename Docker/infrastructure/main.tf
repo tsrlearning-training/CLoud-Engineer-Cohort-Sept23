@@ -76,7 +76,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   location            = module.resource_group.rg_location
   size                = each.value.size
   admin_username      = each.value.admin_username
-  custom_data         = base64encode(file(local.custom_data))
+  custom_data         = base64encode(data.template_file.custom_data[each.key].rendered)
   network_interface_ids = [
     azurerm_network_interface.nic[each.key].id
   ]

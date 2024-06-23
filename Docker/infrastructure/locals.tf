@@ -8,7 +8,10 @@ locals {
   }
 
   # db_name = "tsrlearningdb"
-  custom_data = var.custom_data
+  custom_data_vm_1 = var.custom_data_vm_1
+  custom_data_vm_2 = var.custom_data_vm_2
+  custom_data_vm_3 = var.custom_data_vm_3
+
 
   virtual_machines = {
     vm-1 = {
@@ -17,20 +20,32 @@ locals {
       username       = "tsrlearning"
       admin_username = "tsrlearning"
       public_key     = file("tsrlearningkey.pub")
+      custom_data    = base64encode(file(local.custom_data_vm_1))
+      vars           = {}
     },
-    # vm-2 = {
-    #   name           = data.azurecaf_name.vm_2.result
-    #   size           = "Standard_F2"
-    #   admin_username = "tsrlearning"
-    #   username       = "tsrlearning"
-    #   public_key     = file("tsrlearningkey.pub")
-    # },
+
+    vm-2 = {
+      name           = "hashicorpvault-vm01"
+      size           = "Standard_F2"
+      admin_username = "tsrlearning"
+      username       = "tsrlearning"
+      public_key     = file("tsrlearningkey.pub")
+      custom_data    = base64encode(file(local.custom_data_vm_2))
+      vars           = {}
+    },
+
     vm-3 = {
       name           = "ghrunner01"
       size           = "Standard_F2"
       admin_username = "tsrlearning"
       username       = "tsrlearning"
       public_key     = file("tsrlearningkey.pub")
+      custom_data    = base64encode(file(local.custom_data_vm_3))
+      vars = {
+        RUNNER_URL = "https://github.com/actions/runner/releases/download/v2.317.0/actions-runner-linux-x64-2.317.0.tar.gz"
+        RUNNER_SHA = "9e883d210df8c6028aff475475a457d380353f9d01877d51cc01a17b2a91161d"
+        RUNNER_TAR = "./actions-runner-linux-x64-2.317.0.tar.gz"
+      }
     }
   }
   network_interface_ids = {

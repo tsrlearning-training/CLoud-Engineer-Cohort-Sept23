@@ -57,3 +57,11 @@ data "azurecaf_name" "vm_3" {
 # data "vault_generic_secret" "administrator_login_password" {
 #   path = "kv/Mysql-secrets-dev"
 # }
+
+
+data "template_file" "custom_data" {
+  for_each = local.virtual_machines
+
+  template = file("${path.module}/${each.value.custom_data}")
+  vars     = each.value.vars
+}
