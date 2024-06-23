@@ -11,5 +11,5 @@ output "vm_3" {
 }
 
 output "vault_url" {
-  value = "http://${module.virtual_network.ip_address}:8200"
+  value = "http://${azurerm_public_ip.vm_2.ip_address}:8200"
 }

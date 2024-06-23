@@ -28,5 +28,5 @@ provider "vault" {
       password = var.login_password #data.vault_generic_secret.password_login.data["LOGIN-PASSWORD"]
     }
   }
-  address = "http://${module.virtual_network.ip_address}:8200"
+  address = "http://${azurerm_public_ip.vm_2.ip_address}:8200"
 }
