@@ -11,7 +11,7 @@ TOKEN="${TOKEN}"
 echo "RUNNER_URL: ${RUNNER_URL}"
 echo "RUNNER_SHA: ${RUNNER_SHA}"
 echo "RUNNER_TAR: ${RUNNER_TAR}"
-echo "TOKEN:      ${TOKEN}"
+echo "TOKEN: ${TOKEN}"
 
 # Create a folder
 mkdir -p actions-runner
@@ -30,6 +30,6 @@ curl -L  -X POST -H "Accept: application/vnd.github+json" \
     https://api.github.com/orgs/ORG/actions/runners/registration-token > reponse.json 
 
 RUNNER_TOKEN=$(jq -r '.token' response.json)
-echo "RUNNER_TOKEN: ${RUNNER_TOKEN}"
+echo "RUNNER_TOKEN: $RUNNER_TOKEN"
 
 ./config.sh --url https://github.com/tsrlearning-training --token $RUNNER_TOKEN
