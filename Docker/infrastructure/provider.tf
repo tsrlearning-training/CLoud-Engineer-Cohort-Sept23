@@ -11,10 +11,10 @@ provider "azurerm" {
 }
 
 
-variable "login_username" {
-  type    = string
-  default = "tsrlearning"
-}
+# variable "login_username" {
+#   type    = string
+#   default = "tsrlearning"
+# }
 
 # variable "login_password" {
 #   type = string

@@ -13,7 +13,7 @@ env:
   workdir: "Docker/infrastructure/"
   TF_VAR_private_key: ${{ secrets.private_key }}
   TF_VAR_client_secret: "${{ secrets.client_secret }}"
-  TF_VAR_login_password: "${{ secrets.login_password }}"
+  # TF_VAR_login_password: "${{ secrets.login_password }}"
   ARM_CLIENT_ID: b26145ad-4bdc-4af7-bc86-8dc3d89e9d4e
   ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
   ARM_TENANT_ID: 389dc11c-508a-4f1e-a529-1f19aa1a8e7b
