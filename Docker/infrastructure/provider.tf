@@ -16,9 +16,9 @@ variable "login_username" {
   default = "tsrlearning"
 }
 
-variable "login_password" {
-  type = string
-}
+# variable "login_password" {
+#   type = string
+# }
 
 # provider "vault" {
 #   auth_login {
