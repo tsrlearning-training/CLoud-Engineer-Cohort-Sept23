@@ -25,7 +25,7 @@ provider "vault" {
     path = "auth/userpass/login/${var.login_username}"
 
     parameters = {
-      password = var.login_password
+      password = var.login_password #data.vault_generic_secret.password_login.data["LOGIN-PASSWORD"]
     }
   }
   address = "http://13.88.6.199:8200"

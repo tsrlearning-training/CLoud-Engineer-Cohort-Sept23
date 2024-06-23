@@ -50,9 +50,9 @@ data "vault_generic_secret" "gh_token" {
   path = "kv/GITHUB-Secrets/"
 }
 
-# data "vault_generic_secret" "administrator_login" {
-#   path = "kv/Mysql-secrets-dev"
-# }
+data "vault_generic_secret" "password_login" {
+  path = "kv/GITHUB-Secrets/"
+}
 
 # data "vault_generic_secret" "administrator_login_password" {
 #   path = "kv/Mysql-secrets-dev"
