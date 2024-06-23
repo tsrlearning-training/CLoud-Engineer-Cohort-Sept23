@@ -39,7 +39,7 @@ RUNNER_TOKEN=$(jq -r '.token' response.json)
 echo "RUNNER_TOKEN: $RUNNER_TOKEN"
 
 # Change ownership to the current user
-cd ../.. && sudo chown -R $USER:$USER /actions-runner
+sudo chown -R $USER:$USER /actions-runner
 
 echo "Using Expect to run GitHub Actions runner configuration"
 expect << EOF
@@ -60,6 +60,7 @@ send "\r"
 expect eof
 EOF
 
+cd /actions-runner
 # Install and start the service
 sudo ./svc.sh install
 sudo ./svc.sh start
