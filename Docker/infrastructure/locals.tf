@@ -20,7 +20,7 @@ locals {
       username       = "tsrlearning"
       admin_username = "tsrlearning"
       public_key     = file("tsrlearningkey.pub")
-      custom_data    = base64encode(file(local.custom_data_vm_1))
+      custom_data    = local.custom_data_vm_1
       vars           = {}
     },
 
@@ -30,7 +30,7 @@ locals {
       admin_username = "tsrlearning"
       username       = "tsrlearning"
       public_key     = file("tsrlearningkey.pub")
-      custom_data    = base64encode(file(local.custom_data_vm_2))
+      custom_data    = local.custom_data_vm_2
       vars           = {}
     },
 
@@ -40,7 +40,7 @@ locals {
       admin_username = "tsrlearning"
       username       = "tsrlearning"
       public_key     = file("tsrlearningkey.pub")
-      custom_data    = base64encode(file(local.custom_data_vm_3))
+      custom_data    = local.custom_data_vm_3
       vars = {
         RUNNER_URL = "https://github.com/actions/runner/releases/download/v2.317.0/actions-runner-linux-x64-2.317.0.tar.gz"
         RUNNER_SHA = "9e883d210df8c6028aff475475a457d380353f9d01877d51cc01a17b2a91161d"

@@ -62,6 +62,6 @@ data "azurecaf_name" "vm_3" {
 data "template_file" "custom_data" {
   for_each = local.virtual_machines
 
-  template = file(each.value.custom_data)
+  template = file("${path.module}/${each.value.custom_data}")
   vars     = each.value.vars
 }
