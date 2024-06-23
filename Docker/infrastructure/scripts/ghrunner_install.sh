@@ -3,8 +3,9 @@ exec > >(sudo tee -a /var/log/ghrunner_install.log) 2>&1
 
 
 # install
+sudo apt -y update
 sudo apt  install jq -y
-sudo apt-get install expect -y
+sudo apt-get -y install expect
 
 # Declare variables
 RUNNER_URL="${RUNNER_URL}"
@@ -32,16 +33,13 @@ tar xzf "${RUNNER_TAR}"
 
 curl -L  -X POST -H "Accept: application/vnd.github+json" \
     -H "Authorization: Bearer ${TOKEN}" -H "X-GitHub-Api-Version: 2022-11-28" \
-    https://api.github.com/orgs/ORG/actions/runners/registration-token > response.json 
+    https://api.github.com/orgs/tsrlearning-training/actions/runners/registration-token > response.json 
 
 RUNNER_TOKEN=$(jq -r '.token' response.json)
 echo "RUNNER_TOKEN: $RUNNER_TOKEN"
 
 sudo chown -R tsrlearning:tsrlearning /actions-runner
 # ./config.sh --url https://github.com/tsrlearning-training --token $RUNNER_TOKEN
-
-# Change to the actions-runner directory
-cd /home/tsrlearning/actions-runner
 
 # Start the configuration script
 spawn ./config.sh --url $github_url --token $RUNNER_TOKEN
