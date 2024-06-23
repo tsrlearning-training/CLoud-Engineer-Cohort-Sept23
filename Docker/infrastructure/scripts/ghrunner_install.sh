@@ -20,7 +20,7 @@ echo "RUNNER_TAR: ${RUNNER_TAR}"
 echo "TOKEN: ${TOKEN}"
 
 
-mkdir -p "$HOME/actions-runner" && sudo chown -R $USER:$USER "$HOME/actions-runner" && cd actions-runner
+sudo mkdir -p "$HOME/actions-runner" && sudo chown -R $USER:$USER "$HOME/actions-runner" && cd actions-runner
 echo "Current directory: $(pwd)"
 
 curl -o actions-runner-linux-x64-2.317.0.tar.gz -L "${RUNNER_URL}"
