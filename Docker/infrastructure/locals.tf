@@ -15,7 +15,7 @@ locals {
 
   virtual_machines = {
     vm-1 = {
-      name           = data.azurecaf_name.vm_1.result
+      name           = "resumeapp-vm01"
       size           = "Standard_F2"
       username       = "tsrlearning"
       admin_username = "tsrlearning"
@@ -35,7 +35,7 @@ locals {
     },
 
     vm-3 = {
-      name           = "ghrunner01"
+      name           = "ghrunner-vm01"
       size           = "Standard_F2"
       admin_username = "tsrlearning"
       username       = "tsrlearning"
