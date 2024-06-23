@@ -38,15 +38,14 @@ curl -L  -X POST -H "Accept: application/vnd.github+json" \
 RUNNER_TOKEN=$(jq -r '.token' response.json)
 echo "RUNNER_TOKEN: $RUNNER_TOKEN"
 
-# sudo chown -R tsrlearning:tsrlearning /actions-runner
-sudo chown -R $USER:$USER /actions-runner
-# ./config.sh --url https://github.com/tsrlearning-training --token $RUNNER_TOKEN
+# Change ownership to the current user
+sudo chown -R $USER:$USER ~/actions-runner
 
-# Start the configuration script
+# Using Expect to run the GitHub Actions runner configuration
 echo "Using Expect to run GitHub Actions runner configuration"
-set timeout -1
 expect << EOF
-spawn ./config.sh --url $github_url --token $RUNNER_TOKEN
+set timeout -1
+spawn ./config.sh --url https://github.com/tsrlearning-training --token $RUNNER_TOKEN
 expect "Enter the name of the runner group to add this runner to: "
 send "\r"
 
@@ -58,7 +57,10 @@ send "ghrunner-vm01\r"
 
 expect "Enter name of work folder: "
 send "\r"
+
+expect eof
 EOF
 
+# Install and start the service
 sudo ./svc.sh install
 sudo ./svc.sh start
