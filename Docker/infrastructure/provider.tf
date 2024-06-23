@@ -20,13 +20,13 @@ variable "login_password" {
   type = string
 }
 
-# provider "vault" {
-#   auth_login {
-#     path = "auth/userpass/login/${var.login_username}"
+provider "vault" {
+  auth_login {
+    path = "auth/userpass/login/${var.login_username}"
 
-#     parameters = {
-#       password = var.login_password #data.vault_generic_secret.password_login.data["LOGIN-PASSWORD"]
-#     }
-#   }
-#   address = "http://13.88.6.199:8200"
-# }
+    parameters = {
+      password = var.login_password #data.vault_generic_secret.password_login.data["LOGIN-PASSWORD"]
+    }
+  }
+  address = "http://${module.virtual_network.ip_address}:8200"
+}
