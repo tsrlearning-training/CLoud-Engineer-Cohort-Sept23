@@ -1,64 +1,64 @@
-#!/bin/bash
-exec > >(sudo tee -a /var/log/ghrunner_install.log) 2>&1
+# #!/bin/bash
+# exec > >(sudo tee -a /var/log/ghrunner_install.log) 2>&1
 
 
-# install
-sudo apt -y update
-sudo apt  install jq -y
-sudo apt-get -y install expect
+# # install
+# sudo apt -y update
+# sudo apt  install jq -y
+# sudo apt-get -y install expect
 
-# Declare variables
-RUNNER_URL="${RUNNER_URL}"
-RUNNER_SHA="${RUNNER_SHA}"
-RUNNER_TAR="${RUNNER_TAR}"
-TOKEN="${TOKEN}"
+# # Declare variables
+# RUNNER_URL="${RUNNER_URL}"
+# RUNNER_SHA="${RUNNER_SHA}"
+# RUNNER_TAR="${RUNNER_TAR}"
+# TOKEN="${TOKEN}"
 
-# Debug: Print variables
-echo "RUNNER_URL: ${RUNNER_URL}"
-echo "RUNNER_SHA: ${RUNNER_SHA}"
-echo "RUNNER_TAR: ${RUNNER_TAR}"
-echo "TOKEN: ${TOKEN}"
+# # Debug: Print variables
+# echo "RUNNER_URL: ${RUNNER_URL}"
+# echo "RUNNER_SHA: ${RUNNER_SHA}"
+# echo "RUNNER_TAR: ${RUNNER_TAR}"
+# echo "TOKEN: ${TOKEN}"
 
-# Create a folder
-mkdir -p actions-runner
-cd actions-runner
+# # Create a folder
+# mkdir -p actions-runner
+# cd actions-runner
 
-# Debug: Print current directory
-echo "Current directory: $(pwd)"
+# # Debug: Print current directory
+# echo "Current directory: $(pwd)"
 
-# Download and verify the runner
-curl -o actions-runner-linux-x64-2.317.0.tar.gz -L "${RUNNER_URL}"
-echo "${RUNNER_SHA}  actions-runner-linux-x64-2.317.0.tar.gz" | shasum -a 256 -c
-tar xzf "${RUNNER_TAR}"
+# # Download and verify the runner
+# curl -o actions-runner-linux-x64-2.317.0.tar.gz -L "${RUNNER_URL}"
+# echo "${RUNNER_SHA}  actions-runner-linux-x64-2.317.0.tar.gz" | shasum -a 256 -c
+# tar xzf "${RUNNER_TAR}"
 
-curl -L  -X POST -H "Accept: application/vnd.github+json" \
-    -H "Authorization: Bearer ${TOKEN}" -H "X-GitHub-Api-Version: 2022-11-28" \
-    https://api.github.com/orgs/tsrlearning-training/actions/runners/registration-token > response.json 
+# curl -L  -X POST -H "Accept: application/vnd.github+json" \
+#     -H "Authorization: Bearer ${TOKEN}" -H "X-GitHub-Api-Version: 2022-11-28" \
+#     https://api.github.com/orgs/tsrlearning-training/actions/runners/registration-token > response.json 
 
-RUNNER_TOKEN=$(jq -r '.token' response.json)
-echo "RUNNER_TOKEN: $RUNNER_TOKEN"
+# RUNNER_TOKEN=$(jq -r '.token' response.json)
+# echo "RUNNER_TOKEN: $RUNNER_TOKEN"
 
-# sudo chown -R tsrlearning:tsrlearning /actions-runner
-sudo chown -R $USER:$USER /actions-runner
-# ./config.sh --url https://github.com/tsrlearning-training --token $RUNNER_TOKEN
+# # sudo chown -R tsrlearning:tsrlearning /actions-runner
+# sudo chown -R $USER:$USER /actions-runner
+# # ./config.sh --url https://github.com/tsrlearning-training --token $RUNNER_TOKEN
 
-# Start the configuration script
-echo "Using Expect to run GitHub Actions runner configuration"
-set timeout -1
-expect << EOF
-spawn ./config.sh --url $github_url --token $RUNNER_TOKEN
-expect "Enter the name of the runner group to add this runner to: "
-send "\r"
+# # Start the configuration script
+# echo "Using Expect to run GitHub Actions runner configuration"
+# set timeout -1
+# expect << EOF
+# spawn ./config.sh --url $github_url --token $RUNNER_TOKEN
+# expect "Enter the name of the runner group to add this runner to: "
+# send "\r"
 
-expect "Enter the name of runner: "
-send "\r"
+# expect "Enter the name of runner: "
+# send "\r"
 
-expect "Enter any additional labels (ex. label-1,label-2):"
-send "ghrunner-vm01\r"
+# expect "Enter any additional labels (ex. label-1,label-2):"
+# send "ghrunner-vm01\r"
 
-expect "Enter name of work folder: "
-send "\r"
-EOF
+# expect "Enter name of work folder: "
+# send "\r"
+# EOF
 
-sudo ./svc.sh install
-sudo ./svc.sh start
+# sudo ./svc.sh install
+# sudo ./svc.sh start
