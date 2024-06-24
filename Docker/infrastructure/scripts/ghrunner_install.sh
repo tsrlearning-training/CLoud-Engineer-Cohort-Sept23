@@ -49,7 +49,7 @@ echo "Running GitHub Actions runner configuration"
 # Run the configuration script as the user (not with sudo)
 sudo -u tsrlearning -i <<EOF
 cd $RUNNER_DIR
-./config.sh --url https://github.com/${GITHUB_ORG} --token ${RUNNER_TOKEN} <<INPUTS
+./config.sh --url https://github.com/$GITHUB_ORG --token ${RUNNER_TOKEN} <<INPUTS
 TSRLearning Default Runner Group
 ghrunner-vm-01
 self-hosted,Linux,X64,ghrunner-vm-01
