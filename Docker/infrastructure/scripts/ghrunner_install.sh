@@ -21,7 +21,7 @@ echo "TOKEN: ${TOKEN}"
 
 
 # Create a folder and navigate into it
-cd / && mkdir actions-runner
+mkdir actions-runner && cd actions-runner
 sudo chown -R $USER:$USER /actions-runner
 
 cd actions-runner
