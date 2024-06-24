@@ -40,7 +40,7 @@ echo "RUNNER_TOKEN: $RUNNER_TOKEN"
 
 # Run the configuration script with automated inputs
 echo "Running GitHub Actions runner configuration"
-./config.sh --url https://github.com/${GITHUB_ORG} --token $RUNNER_TOKEN <<EOF
+./config.sh --url https://github.com/$GITHUB_ORG --token $RUNNER_TOKEN <<EOF
 TSRLearning Default Runner Group
 ghrunner-vm01
 self-hosted,Linux,X64,ghrunner-vm01
