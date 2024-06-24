@@ -38,7 +38,7 @@ curl -L  -X POST -H "Accept: application/vnd.github+json" \
     https://api.github.com/orgs/$GITHUB_ORG/actions/runners/registration-token > response.json 
 
 # Ensure response.json is owned by the current user
-chown $USER:$USER response.json
+sudo chown $USER:$USER response.json
 
 RUNNER_TOKEN=$(jq -r '.token' response.json)
 echo "RUNNER_TOKEN: $RUNNER_TOKEN"
@@ -46,7 +46,10 @@ echo "RUNNER_TOKEN: $RUNNER_TOKEN"
 # Run the configuration script with automated inputs
 echo "Running GitHub Actions runner configuration"
 
-./config.sh --url https://github.com/$GITHUB_ORG --token $RUNNER_TOKEN <<EOF
+# Run the configuration script as the user (not with sudo)
+sudo -u tsrlearning -i <<EOF
+cd $RUNNER_DIR
+./config.sh --url https://github.com/${GITHUB_ORG} --token ${RUNNER_TOKEN} <<INPUTS
 TSRLearning Default Runner Group
 ghrunner-vm-01
 self-hosted,Linux,X64,ghrunner-vm-01
@@ -54,7 +57,7 @@ _work
 EOF
 
 # Ensure correct ownership before installing the service
-chown -R $USER:$USER "$HOME/actions-runner"
+sudo chown -R $USER:$USER "$HOME/actions-runner"
 
 ./run.sh &
 
