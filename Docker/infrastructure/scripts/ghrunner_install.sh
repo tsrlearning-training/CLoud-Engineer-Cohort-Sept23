@@ -12,7 +12,7 @@ RUNNER_URL="${RUNNER_URL}"
 RUNNER_SHA="${RUNNER_SHA}"
 RUNNER_TAR="${RUNNER_TAR}"
 TOKEN="${TOKEN}"
-GITHUB_ORG="tsrlearning-training"
+GITHUB_ORG=""
 
 # Debug: Print variables
 echo "RUNNER_URL: ${RUNNER_URL}"
@@ -22,7 +22,10 @@ echo "TOKEN:      ${TOKEN}"
 
 
 # Create a folder and navigate into it
-mkdir -p /home/tsrlearning/actions-runner/ && sudo chown $USER:$USER -R /home/tsrlearning/actions-runner/ && cd /home/tsrlearning/actions-runner/
+mkdir -p /home/tsrlearning/actions-runner/ 
+sudo chown $USER:$USER -R /home/tsrlearning/actions-runner/ 
+cd /home/tsrlearning/actions-runner/
+sudo chown -R $USER:$USER "$HOME/actions-runner"
 
 # Debug: Print current directory
 echo "Current directory: $(pwd)"
@@ -40,6 +43,7 @@ echo "RUNNER_TOKEN: $RUNNER_TOKEN"
 
 # Run the configuration script with automated inputs
 echo "Running GitHub Actions runner configuration"
+
 ./config.sh --url https://github.com/$GITHUB_ORG --token $RUNNER_TOKEN <<EOF
 TSRLearning Default Runner Group
 ghrunner-vm01
