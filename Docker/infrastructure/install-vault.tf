@@ -4,7 +4,7 @@
 #     connection {
 #       type        = "ssh"
 #       user        = "tsrlearning"
-#       private_key = file("tsrlearningkey") #var.private_key
+#       private_key = var.private_key
 #       host        = azurerm_public_ip.vm_2.ip_address
 #     }
 
@@ -16,7 +16,7 @@
 #     connection {
 #       type        = "ssh"
 #       user        = "tsrlearning"
-#       private_key = file("tsrlearningkey") #var.private_key
+#       private_key = var.private_key
 #       host        = azurerm_public_ip.vm_2.ip_address
 #     }
 
@@ -27,4 +27,3 @@
 #   }
 #   depends_on = [azurerm_linux_virtual_machine.vm]
 # }
-

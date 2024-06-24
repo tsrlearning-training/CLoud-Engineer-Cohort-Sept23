@@ -191,18 +191,18 @@ resource "azurerm_network_security_rule" "vault_api_addr_rule" {
   network_security_group_name = module.subnet.nsg_name
 }
 
-# resource "azurerm_network_security_rule" "vault_cluster_addr_rule" {
-#   name                        = "vault-cluster-addr-rule"
-#   priority                    = 113
-#   direction                   = "Inbound"
-#   access                      = "Allow"
-#   protocol                    = "Tcp"
-#   source_port_range           = "*"
-#   destination_port_range      = "8201"
-#   source_address_prefix       = "143.55.59.117/32"
-#   destination_address_prefix  = "*"
-#   description                 = "NSG used for vault connectivity"
-#   resource_group_name         = module.resource_group.rg_name
-#   network_security_group_name = module.subnet.nsg_name
-# }
+resource "azurerm_network_security_rule" "vault_cluster_addr_rule" {
+  name                        = "vault-cluster-addr-rule"
+  priority                    = 113
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "8201"
+  source_address_prefix       = "143.55.59.117/32"
+  destination_address_prefix  = "*"
+  description                 = "NSG used for vault connectivity"
+  resource_group_name         = module.resource_group.rg_name
+  network_security_group_name = module.subnet.nsg_name
+}
 

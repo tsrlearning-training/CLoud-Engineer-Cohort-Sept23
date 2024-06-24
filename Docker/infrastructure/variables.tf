@@ -33,9 +33,9 @@ variable "vm_username" {
   default     = "tsrlearning"
 }
 
-# variable "private_key" {
-#   type = string
-# }
+variable "private_key" {
+  type = string
+}
 
 # variable "SLACK_WEBHOOK_URL" {
 #   type = string
@@ -44,3 +44,18 @@ variable "vm_username" {
 # variable "storage_account_key" {
 #   type = string
 # }
+
+variable "custom_data_vm_1" {
+  description = "Path to the custom data script for VM initialization"
+  type        = string
+}
+
+variable "custom_data_vm_2" {
+  description = "Path to the custom data script for VM initialization"
+  type        = string
+}
+
+variable "custom_data_vm_3" {
+  description = "Path to the custom data script for VM initialization"
+  type        = string
+}
