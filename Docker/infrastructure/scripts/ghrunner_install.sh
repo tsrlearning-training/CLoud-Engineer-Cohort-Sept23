@@ -41,7 +41,7 @@ echo "RUNNER_TOKEN: $RUNNER_TOKEN"
 echo "Using Expect to run GitHub Actions runner configuration"
 expect << EOF
     set timeout -1
-    spawn sudo ./config.sh --url https://github.com/tsrlearning-training --token $RUNNER_TOKEN
+    spawn ./config.sh --url https://github.com/tsrlearning-training --token $RUNNER_TOKEN
     expect "Enter the name of the runner group to add this runner to: "
     send "\r"
 
