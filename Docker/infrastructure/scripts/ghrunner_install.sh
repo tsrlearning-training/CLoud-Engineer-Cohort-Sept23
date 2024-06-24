@@ -58,6 +58,6 @@ sudo chown -R $USER:$USER "$HOME/actions-runner"
 
 ./run.sh &
 
-# Install and start the service
-sudo ./svc.sh install
-sudo ./svc.sh start
+# # Install and start the service
+# sudo ./svc.sh install
+# sudo ./svc.sh start
