@@ -12,18 +12,17 @@ RUNNER_URL="${RUNNER_URL}"
 RUNNER_SHA="${RUNNER_SHA}"
 RUNNER_TAR="${RUNNER_TAR}"
 TOKEN="${TOKEN}"
+GITHUB_ORG="tsrlearning-training"
 
 # Debug: Print variables
 echo "RUNNER_URL: ${RUNNER_URL}"
 echo "RUNNER_SHA: ${RUNNER_SHA}"
 echo "RUNNER_TAR: ${RUNNER_TAR}"
-echo "TOKEN: ${TOKEN}"
+echo "TOKEN:      ${TOKEN}"
 
 
 # Create a folder and navigate into it
-# mkdir -p /home/tsrlearning/actions-runner/ && sudo chown $USER:$USER -R /home/tsrlearning/actions-runner/ && cd /home/tsrlearning/actions-runner/
-sudo su -
-mkdir actions-runner && cd actions-runner
+mkdir -p /home/tsrlearning/actions-runner/ && sudo chown $USER:$USER -R /home/tsrlearning/actions-runner/ && cd /home/tsrlearning/actions-runner/
 
 # Debug: Print current directory
 echo "Current directory: $(pwd)"
@@ -39,24 +38,14 @@ curl -L  -X POST -H "Accept: application/vnd.github+json" \
 RUNNER_TOKEN=$(jq -r '.token' response.json)
 echo "RUNNER_TOKEN: $RUNNER_TOKEN"
 
-echo "Using Expect to run GitHub Actions runner configuration"
-expect << EOF
-    set timeout -1
-    spawn ./config.sh --url https://github.com/tsrlearning-training --token $RUNNER_TOKEN
-    expect "Enter the name of the runner group to add this runner to: "
-    send "\r"
-
-    expect "Enter the name of runner: "
-    send "\r"
-
-    expect "Enter any additional labels (ex. label-1,label-2):"
-    send "ghrunner-vm01\r"
-
-    expect "Enter name of work folder: "
-    send "\r"
+# Run the configuration script with automated inputs
+echo "Running GitHub Actions runner configuration"
+./config.sh --url https://github.com/${GITHUB_ORG} --token $RUNNER_TOKEN <<EOF
+TSRLearning Default Runner Group
+ghrunner-vm01
+self-hosted,Linux,X64,ghrunner-vm01
+_work
 EOF
-
-echo $PWD
 
 # Install and start the service
 sudo ./svc.sh install
