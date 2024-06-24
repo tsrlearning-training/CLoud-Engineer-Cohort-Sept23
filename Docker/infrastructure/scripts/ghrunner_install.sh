@@ -48,16 +48,16 @@ echo "Running GitHub Actions runner configuration"
 
 ./config.sh --url https://github.com/$GITHUB_ORG --token $RUNNER_TOKEN <<EOF
 TSRLearning Default Runner Group
-ghrunner-vm01
-self-hosted,Linux,X64,ghrunner-vm01
+ghrunner-vm-01
+self-hosted,Linux,X64,ghrunner-vm-01
 _work
 EOF
 
 # Ensure correct ownership before installing the service
 sudo chown -R $USER:$USER "$HOME/actions-runner"
 
-# # Install and start the service
-# sudo ./svc.sh install
-# sudo ./svc.sh start
+./run.sh &
 
-./run.sh
+# Install and start the service
+sudo ./svc.sh install
+sudo ./svc.sh start
