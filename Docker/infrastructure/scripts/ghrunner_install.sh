@@ -13,7 +13,7 @@ RUNNER_SHA="${RUNNER_SHA}"
 RUNNER_TAR="${RUNNER_TAR}"
 TOKEN="${TOKEN}"
 GITHUB_ORG="tsrlearning-training"
-HOME="/home/tsrlearning"
+USER_HOME="/home/tsrlearning"
 USER="tsrlearning"
 RUNNER_DIR="$USER_HOME/actions-runner"
 
@@ -47,20 +47,32 @@ echo "RUNNER_TOKEN: $RUNNER_TOKEN"
 # Run the configuration script with automated inputs
 echo "Running GitHub Actions runner configuration"
 
+# Ensure all files and directories have correct ownership before configuration
+sudo chown -R tsrlearning:tsrlearning "$RUNNER_DIR"
+
 # Run the configuration script as the user (not with sudo)
 sudo -u tsrlearning bash <<EOF
 cd $RUNNER_DIR
-echo "TSRLearning Default Runner Group" | ./config.sh --url https://github.com/$GITHUB_ORG --token $RUNNER_TOKEN
-echo "ghrunner-vm-01" | ./config.sh --url https://github.com/$GITHUB_ORG --token $RUNNER_TOKEN
-echo "self-hosted,Linux,X64,ghrunner-vm-01" | ./config.sh --url https://github.com/$GITHUB_ORG --token $RUNNER_TOKEN
-echo "_work" | ./config.sh --url https://github.com/$GITHUB_ORG --token $RUNNER_TOKEN
+./config.sh --url https://github.com/$GITHUB_ORG --token $RUNNER_TOKEN <<EOL
+TSRLearning Default Runner Group
+ghrunner-vm-01
+self-hosted,Linux,X64,ghrunner-vm-01
+_work
+EOL
 EOF
 
 # Ensure correct ownership before installing the service
-sudo chown -R $USER:$USER "$HOME/actions-runner"
+sudo chown -R tsrlearning:tsrlearning "$RUNNER_DIR"
 
-./run.sh &
+# Debug: List files to ensure correct ownership and presence of svc.sh
+ls -la
 
-# # Install and start the service
-# sudo ./svc.sh install
-# sudo ./svc.sh start
+# Install and start the service as the user
+sudo -u tsrlearning bash <<EOF
+cd $RUNNER_DIR
+./svc.sh install
+./svc.sh start
+EOF
+
+# Check if the service is running
+sudo systemctl status actions.runner.$GITHUB_ORG.ghrunner-vm-01.service
