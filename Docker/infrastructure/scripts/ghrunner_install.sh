@@ -22,13 +22,10 @@ echo "TOKEN:      ${TOKEN}"
 
 
 # Create a folder and navigate into it
-mkdir -p /home/tsrlearning/actions-runner/ 
-sudo chown $USER:$USER -R /home/tsrlearning/actions-runner/ 
-cd /home/tsrlearning/actions-runner/
-sudo chown -R $USER:$USER "$HOME/actions-runner"
-
-# Debug: Print current directory
+mkdir -p "$HOME/actions-runner"
+cd "$HOME/actions-runner"
 echo "Current directory: $(pwd)"
+sudo chown -R $USER:$USER "$HOME/actions-runner"
 
 curl -o actions-runner-linux-x64-2.317.0.tar.gz -L "${RUNNER_URL}"
 echo "${RUNNER_SHA}  actions-runner-linux-x64-2.317.0.tar.gz" | shasum -a 256 -c
