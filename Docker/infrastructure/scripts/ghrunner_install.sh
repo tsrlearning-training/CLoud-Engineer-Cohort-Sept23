@@ -12,7 +12,8 @@ RUNNER_URL="${RUNNER_URL}"
 RUNNER_SHA="${RUNNER_SHA}"
 RUNNER_TAR="${RUNNER_TAR}"
 TOKEN="${TOKEN}"
-GITHUB_ORG=""
+GITHUB_ORG="tsrlearning-training"
+HOME="/home/tsrlearning"
 
 # Debug: Print variables
 echo "RUNNER_URL: ${RUNNER_URL}"
@@ -24,7 +25,7 @@ echo "TOKEN:      ${TOKEN}"
 # Create a folder and navigate into it
 mkdir -p "$HOME/actions-runner"
 cd "$HOME/actions-runner"
-echo "Current directory: $(pwd)"
+echo $PWD
 sudo chown -R $USER:$USER "$HOME/actions-runner"
 
 curl -o actions-runner-linux-x64-2.317.0.tar.gz -L "${RUNNER_URL}"
@@ -33,7 +34,7 @@ tar xzf "${RUNNER_TAR}"
 
 curl -L  -X POST -H "Accept: application/vnd.github+json" \
     -H "Authorization: Bearer ${TOKEN}" -H "X-GitHub-Api-Version: 2022-11-28" \
-    https://api.github.com/orgs/tsrlearning-training/actions/runners/registration-token > response.json 
+    https://api.github.com/orgs/$GITHUB_ORG/actions/runners/registration-token > response.json 
 
 RUNNER_TOKEN=$(jq -r '.token' response.json)
 echo "RUNNER_TOKEN: $RUNNER_TOKEN"
