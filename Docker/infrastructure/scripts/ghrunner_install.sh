@@ -55,6 +55,7 @@ expect << EOF
     send "\r"
 EOF
 
+echo $PWD
 # Install and start the service
 sudo ./svc.sh install
 sudo ./svc.sh start
