@@ -8,6 +8,7 @@ on:
       arm_client_secret:
         description: 'Azure Client Secret'
         required: true
+        default: '${{ secrets.client_secret }}'
       arm_tenant_id:
         description: 'Azure Tenant ID'
         required: true
