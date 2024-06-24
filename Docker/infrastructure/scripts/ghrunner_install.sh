@@ -22,9 +22,11 @@ echo "TOKEN: ${TOKEN}"
 
 # Create a folder and navigate into it
 cd / && mkdir actions-runner
+sudo chown -R $USER:$USER /actions-runner
+
 cd actions-runner
 
-# # Debug: Print current directory
+# Debug: Print current directory
 echo "Current directory: $(pwd)"
 
 curl -o actions-runner-linux-x64-2.317.0.tar.gz -L "${RUNNER_URL}"
@@ -41,7 +43,6 @@ echo "RUNNER_TOKEN: $RUNNER_TOKEN"
 echo "Using Expect to run GitHub Actions runner configuration"
 expect << EOF
     set timeout -1
-    cd /&& cd actions-runner
     spawn ./config.sh --url https://github.com/tsrlearning-training --token $RUNNER_TOKEN
     expect "Enter the name of the runner group to add this runner to: "
     send "\r"
