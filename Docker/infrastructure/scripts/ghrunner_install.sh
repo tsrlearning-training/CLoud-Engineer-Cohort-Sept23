@@ -14,6 +14,7 @@ RUNNER_TAR="${RUNNER_TAR}"
 TOKEN="${TOKEN}"
 GITHUB_ORG="tsrlearning-training"
 HOME="/home/tsrlearning"
+USER="tsrlearning"
 
 # Debug: Print variables
 echo "RUNNER_URL: ${RUNNER_URL}"
