@@ -1,6 +1,6 @@
 #!/bin/bash
 exec > >(sudo tee -a /var/log/ghrunner_install.log) 2>&1
-
+set -x
 
 # install
 sudo apt -y update
