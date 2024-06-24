@@ -15,6 +15,7 @@ TOKEN="${TOKEN}"
 GITHUB_ORG="tsrlearning-training"
 HOME="/home/tsrlearning"
 USER="tsrlearning"
+RUNNER_DIR="$USER_HOME/actions-runner"
 
 # Debug: Print variables
 echo "RUNNER_URL: ${RUNNER_URL}"
@@ -48,13 +49,11 @@ echo "Running GitHub Actions runner configuration"
 
 # Run the configuration script as the user (not with sudo)
 sudo -u tsrlearning bash <<EOF
-cd $HOME/actions-runner
-./config.sh --url https://github.com/$GITHUB_ORG --token $RUNNER_TOKEN <<INPUTS
-TSRLearning Default Runner Group
-ghrunner-vm-01
-self-hosted,Linux,X64,ghrunner-vm-01
-_work
-INPUTS
+cd $RUNNER_DIR
+echo "TSRLearning Default Runner Group" | ./config.sh --url https://github.com/$GITHUB_ORG --token $RUNNER_TOKEN
+echo "ghrunner-vm-01" | ./config.sh --url https://github.com/$GITHUB_ORG --token $RUNNER_TOKEN
+echo "self-hosted,Linux,X64,ghrunner-vm-01" | ./config.sh --url https://github.com/$GITHUB_ORG --token $RUNNER_TOKEN
+echo "_work" | ./config.sh --url https://github.com/$GITHUB_ORG --token $RUNNER_TOKEN
 EOF
 
 # Ensure correct ownership before installing the service
