@@ -21,10 +21,8 @@ echo "TOKEN: ${TOKEN}"
 
 
 # Create a folder and navigate into it
-mkdir actions-runner && cd actions-runner
-sudo chown -R $USER:$USER /actions-runner
-
-cd actions-runner
+mkdir -p /home/tsrlearning/actions-runner/ && cd /home/tsrlearning/actions-runner/
+sudo chown -R $USER:$USER /home/tsrlearning/actions-runner/
 
 # Debug: Print current directory
 echo "Current directory: $(pwd)"
