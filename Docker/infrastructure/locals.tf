@@ -8,21 +8,21 @@ locals {
   }
 
   db_name = "tsrlearningdb"
-  # custom_data_vm_1 = var.custom_data_vm_1
+  custom_data_vm_1 = var.custom_data_vm_1
   custom_data_vm_2 = var.custom_data_vm_2
   custom_data_vm_3 = var.custom_data_vm_3
 
 
   virtual_machines = {
-    # vm-1 = {
-    #   name           = "resumeapp-vm01"
-    #   size           = "Standard_F2"
-    #   username       = "tsrlearning"
-    #   admin_username = "tsrlearning"
-    #   public_key     = file("tsrlearningkey.pub")
-    #   custom_data    = local.custom_data_vm_1
-    #   vars           = {}
-    # },
+    vm-1 = {
+      name           = "resumeapp-vm01"
+      size           = "Standard_F2"
+      username       = "tsrlearning"
+      admin_username = "tsrlearning"
+      public_key     = file("tsrlearningkey.pub")
+      custom_data    = local.custom_data_vm_1
+      vars           = {}
+    },
 
     vm-2 = {
       name           = "hashicorpvault-vm01"
