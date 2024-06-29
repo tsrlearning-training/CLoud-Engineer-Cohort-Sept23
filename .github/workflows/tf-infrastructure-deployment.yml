@@ -1,5 +1,4 @@
 name: Create Terraform code for tf-infrastructure folder
-
 on:
   push:
     branches:
@@ -23,7 +22,7 @@ env:
   # RESOURCE_GROUP: "rg-tsrlearning-demo"
   # NSG_NAME: "nsg-ce-tsrlearning-dev-01"
   # TF_VAR_custom_data_vm_1: "${{ github.workspace }}/Docker/infrastructure/scripts/docker_install.sh"
-  # TF_VAR_custom_data_vm_2: "${{ github.workspace }}/Docker/infrastructure/scripts/vault_install.sh"
+  TF_VAR_custom_data_vm_2: "${{ github.workspace }}/Docker/infrastructure/scripts/vault_install.sh"
   TF_VAR_custom_data_vm_3: "${{ github.workspace }}/Docker/infrastructure/scripts/ghrunner_install.sh"
 
 jobs:
