@@ -7,7 +7,7 @@ locals {
     casecode    = "tsr2024"
   }
 
-  # db_name = "tsrlearningdb"
+  db_name = "tsrlearningdb"
   custom_data_vm_1 = var.custom_data_vm_1
   custom_data_vm_2 = var.custom_data_vm_2
   custom_data_vm_3 = var.custom_data_vm_3
@@ -35,7 +35,7 @@ locals {
     },
 
     vm-3 = {
-      name           = "ghrunner-vm01"
+      name           = "ghrunner-vm-01"
       size           = "Standard_F2"
       admin_username = "tsrlearning"
       username       = "tsrlearning"
@@ -45,7 +45,7 @@ locals {
         RUNNER_URL = "https://github.com/actions/runner/releases/download/v2.317.0/actions-runner-linux-x64-2.317.0.tar.gz"
         RUNNER_SHA = "9e883d210df8c6028aff475475a457d380353f9d01877d51cc01a17b2a91161d"
         RUNNER_TAR = "./actions-runner-linux-x64-2.317.0.tar.gz"
-        TOKEN      = data.vault_generic_secret.gh_token.data["TOKEN"]
+        TOKEN      = var.TOKEN #data.vault_generic_secret.gh_token.data["TOKEN"]
       }
     }
   }

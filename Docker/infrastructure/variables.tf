@@ -59,3 +59,8 @@ variable "custom_data_vm_3" {
   description = "Path to the custom data script for VM initialization"
   type        = string
 }
+
+variable "TOKEN" {
+  type        = string
+  description = "The GITHUB Pat access token"
+}

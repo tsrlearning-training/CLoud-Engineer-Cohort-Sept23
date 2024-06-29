@@ -2,10 +2,12 @@
 exec > >(sudo tee -a /var/log/ghrunner_install.log) 2>&1
 set -x
 
-# install
 sudo apt -y update
-sudo apt  install jq -y
-sudo apt-get -y install expect
+
+function install_packages() {
+    sudo apt install -y jq
+}
+install_packages
 
 # Declare variables
 RUNNER_URL="${RUNNER_URL}"
@@ -28,7 +30,7 @@ echo "TOKEN:      ${TOKEN}"
 mkdir -p "$HOME/actions-runner"
 cd "$HOME/actions-runner"
 echo $PWD
-# sudo chown -R $USER:$USER "$HOME/actions-runner"
+
 
 curl -o actions-runner-linux-x64-2.317.0.tar.gz -L "${RUNNER_URL}"
 echo "${RUNNER_SHA}  actions-runner-linux-x64-2.317.0.tar.gz" | shasum -a 256 -c
