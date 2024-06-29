@@ -54,9 +54,13 @@ data "azurecaf_name" "vm_3" {
 #   path = "kv/GITHUB-Secrets/"
 # }
 
-# data "vault_generic_secret" "administrator_login_password" {
-#   path = "kv/Mysql-secrets-dev"
-# }
+data "vault_generic_secret" "administrator_login" {
+  path = "kv/Mysql-secrets-dev"
+}
+
+data "vault_generic_secret" "administrator_login_password" {
+  path = "kv/Mysql-secrets-dev"
+}
 
 
 data "template_file" "custom_data" {

@@ -7,7 +7,7 @@ locals {
     casecode    = "tsr2024"
   }
 
-  # db_name = "tsrlearningdb"
+  db_name = "tsrlearningdb"
   # custom_data_vm_1 = var.custom_data_vm_1
   custom_data_vm_2 = var.custom_data_vm_2
   custom_data_vm_3 = var.custom_data_vm_3
