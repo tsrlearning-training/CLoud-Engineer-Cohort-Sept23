@@ -13,15 +13,16 @@ env:
   workdir: "Docker/infrastructure/"
   TF_VAR_private_key: ${{ secrets.private_key }}
   TF_VAR_client_secret: "${{ secrets.client_secret }}"
-  TF_VAR_login_password: "${{ secrets.login_password }}"
+  TF_VAR_TOKEN: "${{ secrets.TOKEN }}"
+  # TF_VAR_login_password: "${{ secrets.login_password }}"
   ARM_CLIENT_ID: b26145ad-4bdc-4af7-bc86-8dc3d89e9d4e
   ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
   ARM_TENANT_ID: 389dc11c-508a-4f1e-a529-1f19aa1a8e7b
   ARM_SUBSCRIPTION_ID: f823a9e2-b296-41ab-b452-5f2c01eefae8
-  RESOURCE_GROUP: "rg-tsrlearning-demo"
-  NSG_NAME: "nsg-ce-tsrlearning-dev-01"
-  TF_VAR_custom_data_vm_1: "${{ github.workspace }}/Docker/infrastructure/scripts/docker_install.sh"
-  TF_VAR_custom_data_vm_2: "${{ github.workspace }}/Docker/infrastructure/scripts/vault_install.sh"
+  # RESOURCE_GROUP: "rg-tsrlearning-demo"
+  # NSG_NAME: "nsg-ce-tsrlearning-dev-01"
+  # TF_VAR_custom_data_vm_1: "${{ github.workspace }}/Docker/infrastructure/scripts/docker_install.sh"
+  # TF_VAR_custom_data_vm_2: "${{ github.workspace }}/Docker/infrastructure/scripts/vault_install.sh"
   TF_VAR_custom_data_vm_3: "${{ github.workspace }}/Docker/infrastructure/scripts/ghrunner_install.sh"
 
 jobs:
@@ -49,16 +50,16 @@ jobs:
       - name: Azure CLI login
         run: az login --service-principal -u "${{ env.ARM_CLIENT_ID }}" -p"${{ env.TF_VAR_client_secret }}" --tenant "${{ env.ARM_TENANT_ID }}"
 
-      - name: Get Runner IP
-        id: get_ip
-        run: |
-          echo "PUBLIC_IP=$(curl -s https://ipinfo.io/ip)" >> $GITHUB_ENV
+      # - name: Get Runner IP
+      #   id: get_ip
+      #   run: |
+      #     echo "PUBLIC_IP=$(curl -s https://ipinfo.io/ip)" >> $GITHUB_ENV
 
-      - name: Add NSG Rule
-        run: |
-          az network nsg rule create --resource-group ${{ env.RESOURCE_GROUP }} --nsg-name ${{ env.NSG_NAME }} \
-            --name AllowGitHubActionsRunner --priority 300 --source-address-prefixes ${{ env.PUBLIC_IP }} \
-            --destination-address-prefixes '*' --destination-port-ranges 8200 --direction Inbound --access Allow --protocol Tcp
+      # - name: Add NSG Rule
+      #   run: |
+      #     az network nsg rule create --resource-group ${{ env.RESOURCE_GROUP }} --nsg-name ${{ env.NSG_NAME }} \
+      #       --name AllowGitHubActionsRunner --priority 300 --source-address-prefixes ${{ env.PUBLIC_IP }} \
+      #       --destination-address-prefixes '*' --destination-port-ranges 8200 --direction Inbound --access Allow --protocol Tcp
           
       - name: terraform init
         run: cd ${{ github.workspace }}/${{ env.workdir }} && terraform init
@@ -100,7 +101,7 @@ jobs:
           ARM_TENANT_ID: ${{ env.ARM_TENANT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ env.ARM_SUBSCRIPTION_ID }}
 
-      - name: Remove NSG Rule
-        if: always()
-        run: |
-          az network nsg rule delete --resource-group ${{ env.RESOURCE_GROUP }} --nsg-name ${{ env.NSG_NAME }} --name AllowGitHubActionsRunner
+      # - name: Remove NSG Rule
+      #   if: always()
+      #   run: |
+      #     az network nsg rule delete --resource-group ${{ env.RESOURCE_GROUP }} --nsg-name ${{ env.NSG_NAME }} --name AllowGitHubActionsRunner
