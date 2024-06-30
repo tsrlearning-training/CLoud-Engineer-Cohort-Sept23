@@ -104,17 +104,17 @@ resource "azurerm_linux_virtual_machine" "vm" {
 }
 
 resource "azurerm_managed_disk" "disk" {
-  for_each             = local.managed_disks
-  name                 = each.key
+  for_each             = { for key, value in local.managed_disks : key => value if value.name != "" }
+  name                 = each.value.name
   resource_group_name  = module.resource_group.rg_name
   location             = module.resource_group.rg_location
-  storage_account_type = lookup(each.value.storage_account_type, "Standard_LRS")
-  create_option        = lookup(each.value.create_option, "Empty")
-  disk_size_gb         = lookup(each.value.disk_size_gb, 10)
+  storage_account_type = each.value.storage_account_type != "" ? each.value.storage_account_type : "Standard_LRS"
+  create_option        = each.value.create_option != "" ? each.value.create_option : "Empty"
+  disk_size_gb         = each.value.disk_size_gb != "" ? each.value.disk_size_gb : 10
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "disk_attachment" {
-  for_each           = local.managed_disks
+  for_each           = { for key, value in local.managed_disks : key => value if value.name != "" }
   managed_disk_id    = azurerm_managed_disk.disk[each.key].id
   virtual_machine_id = azurerm_linux_virtual_machine.vm[each.key].id
   lun                = "10"

@@ -71,15 +71,11 @@ locals {
   }
 
   managed_disks = {
-    vm-1 = {},
-
     vm-2 = {
       name                 = "${local.disk_name}-01"
       storage_account_type = "Standard_LRS"
       create_option        = "Empty"
       disk_size_gb         = 8
-    },
-
-    vm-3 = {}
+    }
   }
 }
