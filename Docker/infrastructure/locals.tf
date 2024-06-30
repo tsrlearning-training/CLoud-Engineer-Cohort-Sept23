@@ -7,10 +7,11 @@ locals {
     casecode    = "tsr2024"
   }
 
-  db_name = "tsrlearningdb"
+  db_name          = "tsrlearningdb"
   custom_data_vm_1 = var.custom_data_vm_1
   custom_data_vm_2 = var.custom_data_vm_2
   custom_data_vm_3 = var.custom_data_vm_3
+  disk_name        = "hashidisk"
 
 
   virtual_machines = {
@@ -24,15 +25,15 @@ locals {
       vars           = {}
     },
 
-    # vm-2 = {
-    #   name           = "hashicorpvault-vm01"
-    #   size           = "Standard_F2"
-    #   admin_username = "tsrlearning"
-    #   username       = "tsrlearning"
-    #   public_key     = file("tsrlearningkey.pub")
-    #   custom_data    = local.custom_data_vm_2
-    #   vars           = {}
-    # },
+    vm-2 = {
+      name           = "hashicorpvault-vm01"
+      size           = "Standard_F2"
+      admin_username = "tsrlearning"
+      username       = "tsrlearning"
+      public_key     = file("tsrlearningkey.pub")
+      custom_data    = local.custom_data_vm_2
+      vars           = {}
+    },
 
     vm-3 = {
       name           = "ghrunner-vm-01"
@@ -56,16 +57,29 @@ locals {
       subnet_id            = module.subnet.snet_id
     },
 
-    # vm-2 = {
-    #   name                 = data.azurecaf_name.nic_2.result
-    #   public_ip_address_id = azurerm_public_ip.vm_2.id
-    #   subnet_id            = module.subnet.snet_id
-    # },
+    vm-2 = {
+      name                 = data.azurecaf_name.nic_2.result
+      public_ip_address_id = azurerm_public_ip.vm_2.id
+      subnet_id            = module.subnet.snet_id
+    },
 
     vm-3 = {
       name                 = data.azurecaf_name.nic_3.result
       public_ip_address_id = azurerm_public_ip.vm_3.id
       subnet_id            = module.subnet.snet_id
     }
+  }
+
+  managed_disks = {
+    vm-1 = {},
+
+    vm-2 = {
+      name                 = "${local.disk_name}-01"
+      storage_account_type = "Standard_LRS"
+      create_option        = "Empty"
+      disk_size_gb         = 8
+    },
+
+    vm-3 = {}
   }
 }

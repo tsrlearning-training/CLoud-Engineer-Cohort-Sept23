@@ -99,6 +99,24 @@ resource "azurerm_linux_virtual_machine" "vm" {
   }
 
   lifecycle {
-    ignore_changes = [ custom_data ]
+    ignore_changes = [custom_data]
   }
+}
+
+resource "azurerm_managed_disk" "disk" {
+  for_each             = local.managed_disks
+  name                 = each.key
+  resource_group_name  = module.resource_group.rg_name
+  location             = module.resource_group.rg_location
+  storage_account_type = each.value.storage_account_type
+  create_option        = each.value.create_option
+  disk_size_gb         = each.value.disk_size_gb
+}
+
+resource "azurerm_virtual_machine_data_disk_attachment" "disk_attachment" {
+  for_each           = local.managed_disks
+  managed_disk_id    = azurerm_managed_disk.disk[each.key].id
+  virtual_machine_id = azurerm_linux_virtual_machine.vm[each.key].id
+  lun                = "10"
+  caching            = "ReadWrite"
 }
