@@ -24,15 +24,15 @@ locals {
       vars           = {}
     },
 
-    vm-2 = {
-      name           = "hashicorpvault-vm01"
-      size           = "Standard_F2"
-      admin_username = "tsrlearning"
-      username       = "tsrlearning"
-      public_key     = file("tsrlearningkey.pub")
-      custom_data    = local.custom_data_vm_2
-      vars           = {}
-    },
+    # vm-2 = {
+    #   name           = "hashicorpvault-vm01"
+    #   size           = "Standard_F2"
+    #   admin_username = "tsrlearning"
+    #   username       = "tsrlearning"
+    #   public_key     = file("tsrlearningkey.pub")
+    #   custom_data    = local.custom_data_vm_2
+    #   vars           = {}
+    # },
 
     vm-3 = {
       name           = "ghrunner-vm-01"
@@ -56,11 +56,11 @@ locals {
       subnet_id            = module.subnet.snet_id
     },
 
-    vm-2 = {
-      name                 = data.azurecaf_name.nic_2.result
-      public_ip_address_id = azurerm_public_ip.vm_2.id
-      subnet_id            = module.subnet.snet_id
-    },
+    # vm-2 = {
+    #   name                 = data.azurecaf_name.nic_2.result
+    #   public_ip_address_id = azurerm_public_ip.vm_2.id
+    #   subnet_id            = module.subnet.snet_id
+    # },
 
     vm-3 = {
       name                 = data.azurecaf_name.nic_3.result

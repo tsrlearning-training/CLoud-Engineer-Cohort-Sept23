@@ -1,0 +1,20 @@
+---
+all:
+  children:
+    resume_app:
+      hosts:
+        13.64.213.104:
+      vars:
+        ansible_ssh_private_key_file: /home/tsrlearning/.ssh/tsrlearningkey
+
+    hashicorp_server:
+      hosts:
+        13.64.213.101:
+      vars:
+        ansible_ssh_private_key_file: /home/tsrlearning/.ssh/tsrlearningkey
+
+    ghrunner_server:
+      hosts:
+        13.64.213.78:
+      vars:
+        ansible_ssh_private_key_file: /home/tsrlearning/.ssh/tsrlearningkey

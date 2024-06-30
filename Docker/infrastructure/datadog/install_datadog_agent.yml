@@ -1,0 +1,10 @@
+---
+- hosts: resume_app
+  become: yes
+  roles:
+    - datadog/DataDog.datadog
+  vars:
+    vault_config: "{{ lookup('file', 'vault.yml') | from_yaml }}"
+    datadog_api_key: "{{ lookup('community.hashi_vault.hashi_vault', 'kv/datadog:api_key') }}"
+    ansible_python_interpreter: /usr/bin/python3
+
