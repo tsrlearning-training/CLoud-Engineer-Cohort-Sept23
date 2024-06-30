@@ -108,9 +108,9 @@ resource "azurerm_managed_disk" "disk" {
   name                 = each.key
   resource_group_name  = module.resource_group.rg_name
   location             = module.resource_group.rg_location
-  storage_account_type = each.value.storage_account_type
-  create_option        = each.value.create_option
-  disk_size_gb         = each.value.disk_size_gb
+  storage_account_type = lookup(each.value.storage_account_type, null)
+  create_option        = lookup(each.value.create_option, null)
+  disk_size_gb         = lookup(each.value.disk_size_gb, null)
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "disk_attachment" {
