@@ -213,10 +213,25 @@ resource "azurerm_network_security_rule" "custom_app_rule" {
   access                      = "Allow"
   protocol                    = "Tcp"
   source_port_range           = "*"
-  destination_port_range      = "3001"
+  destination_port_range      = "5001"
   source_address_prefix       = "143.55.59.117/32"
   destination_address_prefix  = "*"
   description                 = "NSG used for resumeapp connectivity"
   resource_group_name         = module.resource_group.rg_name
   network_security_group_name = module.subnet.nsg_name
+}
+
+resource "azurerm_network_security_rule" "cutom_rule" {
+  name                        = "CustomRule"
+  priority                    = 115
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "5001"
+  source_address_prefix       = "143.55.59.117/32"
+  destination_address_prefix  = "*"
+  description                 = "NSG used for HTTPS connectivity"
+  resource_group_name         = module.resource_group.rg_name
+  network_security_group_name = module.appgw_subnet.nsg_name
 }
