@@ -9,7 +9,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: r00tp@ss%ord
       MYSQL_DATABASE: weather_app
-      MYSQL_USER: root
     ports:
       - "3306:3306"
     networks:
@@ -25,7 +24,7 @@ services:
     environment:
       FLASK_APP: app.py
       FLASK_ENV: development
-      DATABASE_URL: mysql://weather_user:r00tp@ss%ord@db/weather_app
+      DATABASE_URL: mysql://root:r00tp@ss%ord@db/weather_app
     depends_on:
       - db
     networks:
