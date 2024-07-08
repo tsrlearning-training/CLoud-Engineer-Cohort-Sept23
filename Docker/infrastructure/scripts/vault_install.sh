@@ -62,3 +62,10 @@ sudo systemctl status vault.service
 
 # Start Vault server
 vault server -config=config.hcl &
+
+# sudo pvcreate /dev/sdc
+# sudo vgcreate data /dev/sdc
+# sudo lvcreate -n vault -L 6G data
+# sudo mkfs.ext4 /dev/data/phpapp
+# sudo mount /dev/data/phpapp /mnt/var/www/html/
+# echo "/dev/data/vault /vault/data ext4 defaults 0 0" | sudo tee -a /etc/fstab

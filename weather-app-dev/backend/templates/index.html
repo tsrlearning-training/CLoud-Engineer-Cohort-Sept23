@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .weather-info {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        h1 {
+            color: #0056b3;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 300px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #0056b3;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #004494;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather Information</h1>
+    <form method="get" action="/">
+        <input type="text" name="country" placeholder="Enter country name" required>
+        <input type="submit" value="Get Weather">
+    </form>
+    {% if weather %}
+    <div class="weather-info">
+        <ul>
+            <li><strong>Location:</strong> {{ weather.location }}</li>
+            <li><strong>Temperature:</strong> {{ weather.temperature }}°C</li>
+            <li><strong>Humidity:</strong> {{ weather.humidity }}%</li>
+            <li><strong>Wind Speed:</strong> {{ weather.wind_speed }} km/h</li>
+            <li><strong>Description:</strong> {{ weather.description }}</li>
+        </ul>
+    </div>
+    {% else %}
+    <p>No weather data available. Please enter a country name in the query string, e.g., ?country=USA</p>
+    {% endif %}
+</body>
+</html>

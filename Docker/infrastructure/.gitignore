@@ -47,3 +47,8 @@ tsrlearning.link_cert/ttsrlearning.link.p7b
 ../React-App-MySQL
 ../../Resume-Generator
 ../../Kubeadmin
+
+tsrlearning.link_cert/tsrlearning.link.key
+tsrlearning.link_cert/tsrlearning.link.crt
+tsrlearning.link_cert/tsrlearning.link.ca-bundle
+tsrlearning.link_cert/tsrlearning.link.p7b

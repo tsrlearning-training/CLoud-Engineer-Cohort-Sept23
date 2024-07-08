@@ -21,17 +21,17 @@ module "subnet" {
   virtual_network_name  = module.virtual_network.vnet_name
 }
 
-# module "appgw_subnet" {
-#   use_caf_naming        = false
-#   subnet_name           = "appgwsnet-ce-dev-01"
-#   nsg_name              = "appgwnsg-ce-dev-01"
-#   source                = "git::https://github.com/tsrlearning-training/CLoud-Engineer-Cohort-Sept23.git//Modules/subnet?ref=v1.1.1"
-#   snet_address_prefixes = ["10.1.81.0/24"]
-#   resource_group_name   = module.resource_group.rg_name
-#   location              = module.resource_group.rg_location
-#   public_ip_address_id  = azurerm_public_ip.resume_app.ip_address
-#   virtual_network_name  = module.virtual_network.vnet_name
-# }
+module "appgw_subnet" {
+  use_caf_naming        = false
+  subnet_name           = "appgwsnet-ce-dev-01"
+  nsg_name              = "appgwnsg-ce-dev-01"
+  source                = "git::https://github.com/tsrlearning-training/CLoud-Engineer-Cohort-Sept23.git//Modules/subnet?ref=v1.1.1"
+  snet_address_prefixes = ["10.1.81.0/24"]
+  resource_group_name   = module.resource_group.rg_name
+  location              = module.resource_group.rg_location
+  public_ip_address_id  = azurerm_public_ip.resume_app.ip_address
+  virtual_network_name  = module.virtual_network.vnet_name
+}
 
 ############## VM ##############################
 resource "azurerm_public_ip" "vm_1" {
@@ -99,6 +99,24 @@ resource "azurerm_linux_virtual_machine" "vm" {
   }
 
   lifecycle {
-    ignore_changes = [ custom_data ]
+    ignore_changes = [custom_data]
   }
+}
+
+resource "azurerm_managed_disk" "disk" {
+  for_each             = { for key, value in local.managed_disks : key => value if value.name != "" }
+  name                 = each.value.name
+  resource_group_name  = module.resource_group.rg_name
+  location             = module.resource_group.rg_location
+  storage_account_type = each.value.storage_account_type != "" ? each.value.storage_account_type : "Standard_LRS"
+  create_option        = each.value.create_option != "" ? each.value.create_option : "Empty"
+  disk_size_gb         = each.value.disk_size_gb != "" ? each.value.disk_size_gb : 10
+}
+
+resource "azurerm_virtual_machine_data_disk_attachment" "disk_attachment" {
+  for_each           = { for key, value in local.managed_disks : key => value if value.name != "" }
+  managed_disk_id    = azurerm_managed_disk.disk[each.key].id
+  virtual_machine_id = azurerm_linux_virtual_machine.vm[each.key].id
+  lun                = "10"
+  caching            = "ReadWrite"
 }

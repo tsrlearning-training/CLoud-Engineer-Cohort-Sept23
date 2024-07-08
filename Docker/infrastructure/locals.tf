@@ -7,10 +7,11 @@ locals {
     casecode    = "tsr2024"
   }
 
-  db_name = "tsrlearningdb"
+  db_name          = "tsrlearningdb"
   custom_data_vm_1 = var.custom_data_vm_1
   custom_data_vm_2 = var.custom_data_vm_2
   custom_data_vm_3 = var.custom_data_vm_3
+  disk_name        = "hashidisk"
 
 
   virtual_machines = {
@@ -67,5 +68,14 @@ locals {
       public_ip_address_id = azurerm_public_ip.vm_3.id
       subnet_id            = module.subnet.snet_id
     }
+  }
+
+  managed_disks = {
+    vm-2 = {
+      name                 = "${local.disk_name}-01"
+      storage_account_type = "Standard_LRS"
+      create_option        = "Empty"
+      disk_size_gb         = 8
+    },
   }
 }

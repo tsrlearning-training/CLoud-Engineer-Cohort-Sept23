@@ -13,20 +13,20 @@ resource "azurerm_network_security_rule" "ssh_rule" {
   network_security_group_name = module.subnet.nsg_name
 }
 
-# resource "azurerm_network_security_rule" "http_rule" {
-#   name                        = "HTTPRule"
-#   priority                    = 101
-#   direction                   = "Inbound"
-#   access                      = "Allow"
-#   protocol                    = "Tcp"
-#   source_port_range           = "*"
-#   destination_port_range      = "80"
-#   source_address_prefix       = "143.55.59.117/32"
-#   destination_address_prefix  = "*"
-#   description                 = "NSG used for HTTP connectivity"
-#   resource_group_name         = module.resource_group.rg_name
-#   network_security_group_name = module.subnet.nsg_name
-# }
+resource "azurerm_network_security_rule" "http_rule" {
+  name                        = "HTTPRule"
+  priority                    = 101
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "80"
+  source_address_prefix       = "143.55.59.117/32"
+  destination_address_prefix  = "*"
+  description                 = "NSG used for HTTP connectivity"
+  resource_group_name         = module.resource_group.rg_name
+  network_security_group_name = module.subnet.nsg_name
+}
 
 resource "azurerm_network_security_rule" "https_rule" {
   name                        = "HTTPSRule"
@@ -118,63 +118,63 @@ resource "azurerm_network_security_rule" "resume_app_rule" {
   network_security_group_name = module.subnet.nsg_name
 }
 
-# resource "azurerm_network_security_rule" "GatewayManager" {
-#   name                        = "GatewayManager"
-#   priority                    = 108
-#   direction                   = "Inbound"
-#   access                      = "Allow"
-#   protocol                    = "Tcp"
-#   source_port_range           = "*"
-#   destination_port_ranges     = ["65200-65535"]
-#   source_address_prefix       = "GatewayManager"
-#   destination_address_prefix  = "*"
-#   resource_group_name         = module.resource_group.rg_name
-#   network_security_group_name = module.appgw_subnet.nsg_name
-# }
+resource "azurerm_network_security_rule" "GatewayManager" {
+  name                        = "GatewayManager"
+  priority                    = 108
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_ranges     = ["65200-65535"]
+  source_address_prefix       = "GatewayManager"
+  destination_address_prefix  = "*"
+  resource_group_name         = module.resource_group.rg_name
+  network_security_group_name = module.appgw_subnet.nsg_name
+}
 
-# resource "azurerm_network_security_rule" "AzureLoadBalancer" {
-#   name                        = "AzureLoadBalancer"
-#   priority                    = 109
-#   direction                   = "Inbound"
-#   access                      = "Allow"
-#   protocol                    = "Tcp"
-#   source_port_range           = "*"
-#   destination_port_ranges     = ["65200-65535"]
-#   source_address_prefix       = "AzureLoadBalancer"
-#   destination_address_prefix  = "*"
-#   resource_group_name         = module.resource_group.rg_name
-#   network_security_group_name = module.appgw_subnet.nsg_name
-# }
+resource "azurerm_network_security_rule" "AzureLoadBalancer" {
+  name                        = "AzureLoadBalancer"
+  priority                    = 109
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_ranges     = ["65200-65535"]
+  source_address_prefix       = "AzureLoadBalancer"
+  destination_address_prefix  = "*"
+  resource_group_name         = module.resource_group.rg_name
+  network_security_group_name = module.appgw_subnet.nsg_name
+}
 
-# resource "azurerm_network_security_rule" "resume_http_rule" {
-#   name                        = "Resume-HTTPRule"
-#   priority                    = 110
-#   direction                   = "Inbound"
-#   access                      = "Allow"
-#   protocol                    = "Tcp"
-#   source_port_range           = "*"
-#   destination_port_range      = "80"
-#   source_address_prefix       = "143.55.59.117/32"
-#   destination_address_prefix  = "*"
-#   description                 = "NSG used for HTTP connectivity"
-#   resource_group_name         = module.resource_group.rg_name
-#   network_security_group_name = module.appgw_subnet.nsg_name
-# }
+resource "azurerm_network_security_rule" "resume_http_rule" {
+  name                        = "Resume-HTTPRule"
+  priority                    = 110
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "80"
+  source_address_prefix       = "143.55.59.117/32"
+  destination_address_prefix  = "*"
+  description                 = "NSG used for HTTP connectivity"
+  resource_group_name         = module.resource_group.rg_name
+  network_security_group_name = module.appgw_subnet.nsg_name
+}
 
-# resource "azurerm_network_security_rule" "resume_https_rule" {
-#   name                        = "Resume-HTTPSRule"
-#   priority                    = 111
-#   direction                   = "Inbound"
-#   access                      = "Allow"
-#   protocol                    = "Tcp"
-#   source_port_range           = "*"
-#   destination_port_range      = "443"
-#   source_address_prefix       = "143.55.59.117/32"
-#   destination_address_prefix  = "*"
-#   description                 = "NSG used for HTTPS connectivity"
-#   resource_group_name         = module.resource_group.rg_name
-#   network_security_group_name = module.appgw_subnet.nsg_name
-# }
+resource "azurerm_network_security_rule" "resume_https_rule" {
+  name                        = "Resume-HTTPSRule"
+  priority                    = 111
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "443"
+  source_address_prefix       = "143.55.59.117/32"
+  destination_address_prefix  = "*"
+  description                 = "NSG used for HTTPS connectivity"
+  resource_group_name         = module.resource_group.rg_name
+  network_security_group_name = module.appgw_subnet.nsg_name
+}
 
 resource "azurerm_network_security_rule" "vault_api_addr_rule" {
   name                        = "vault-api-addr-rule"
@@ -206,3 +206,32 @@ resource "azurerm_network_security_rule" "vault_cluster_addr_rule" {
   network_security_group_name = module.subnet.nsg_name
 }
 
+resource "azurerm_network_security_rule" "custom_app_rule" {
+  name                        = "CustomAppRule"
+  priority                    = 114
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "5001"
+  source_address_prefix       = "143.55.59.117/32"
+  destination_address_prefix  = "*"
+  description                 = "NSG used for resumeapp connectivity"
+  resource_group_name         = module.resource_group.rg_name
+  network_security_group_name = module.subnet.nsg_name
+}
+
+resource "azurerm_network_security_rule" "cutom_rule" {
+  name                        = "CustomRule"
+  priority                    = 115
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "5001"
+  source_address_prefix       = "143.55.59.117/32"
+  destination_address_prefix  = "*"
+  description                 = "NSG used for HTTPS connectivity"
+  resource_group_name         = module.resource_group.rg_name
+  network_security_group_name = module.appgw_subnet.nsg_name
+}
