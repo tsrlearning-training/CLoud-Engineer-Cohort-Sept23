@@ -5,12 +5,12 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy the dependencies file to the working directory
-COPY requirements.txt /app
+COPY requirements.txt /app/
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the content of the local src directory to the working directory
+# Copy the content of the local directory to the working directory
 COPY . .
 
 # Make port 5000 available to the world outside this container
